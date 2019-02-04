@@ -27,10 +27,6 @@ while 1:
             elif event.key == pygame.K_SPACE:
                 print("Jump !")
 
-    dep = 2, 2
-    disElems[1].move(dep)
-        #TODO:process keypresses etc
-
 
     for elem in disElems:
         elem.animate(clocktick)
