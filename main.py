@@ -6,16 +6,24 @@ from inputManager import processInputs
 from wall import Wall
 pygame.init()
 # Vars
-size = width, height = 1280, 720
+size = width, height = 1280, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
 pygame.key.set_repeat(1, 500)
 
 
 gameObjects = []
+gameObjects.append(Wall((0,0)))
+gameObjects.append(Wall((4,5)))
 gameObjects.append(Wall((2,5)))
 gameObjects.append(Wall((3,5)))
 gameObjects.append(Wall((4,5)))
+gameObjects.append(Wall((4,6)))
+gameObjects.append(Wall((4,7)))
+gameObjects.append(Wall((4,8)))
+gameObjects.append(Wall((4,2)))
+gameObjects.append(Wall((4,3)))
+
 for obj in gameObjects:
     obj.display = True
 
