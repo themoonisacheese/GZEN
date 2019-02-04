@@ -18,7 +18,14 @@ while 1:
             sys.exit()
         # TODO:process keypresses etc
         if event.type == pygame.KEYDOWN:
-            print(event.key)
+            if event.key == pygame.K_UP or event.key == pygame.K_z or event.key == pygame.K_w:
+                print("up")
+            elif event.key == pygame.K_LEFT or event.key == pygame.K_d:
+                print("right")
+            elif event.key == pygame.K_RIGHT or event.key == pygame.K_q or event.key == pygame.K_a:
+                print("left")
+            elif event.key == pygame.K_SPACE:
+                print("Jump !")
     dep = 2, 2
     disElems[1].move(dep)
     SM.displayElements(disElems)
