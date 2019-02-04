@@ -1,9 +1,8 @@
 import pygame
-from collisionObject import CollisionObject
 from animationAggregator import aggregateAnim
+from gridAlignedObject import GridAlignedObject
 
-class Wall(CollisionObject):
+class Wall(GridAlignedObject):
     def __init__(self, gridPosition):
-        position = gridPosition[0] * 32, gridPosition[1] * 32 #multiply 32 by the scaling factor once decided
-        CollisionObject.__init__(self, position, aggregateAnim('sprites/bat/', 'bat_'), 0.001)
+        GridAlignedObject.__init__(self, gridPosition, aggregateAnim('sprites/murs/', 'mur simple'), 0.001)
         #do texture scaling stuff here.
