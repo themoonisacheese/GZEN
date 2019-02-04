@@ -21,3 +21,6 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 print(event.key)
 
+
+if __name__ == '__main__':
+    main()
