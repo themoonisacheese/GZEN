@@ -1,7 +1,7 @@
 import pygame
-import sys
-class DisplayableElement:
 
+
+class DisplayableElement:
     draw = True
 
     @property
@@ -17,7 +17,7 @@ class DisplayableElement:
             screen.blit(self.texture, self.rect)
 
     def moveto(self, pos):
-        self.rect.center = pos;
+        self.rect.center = pos
 
     def move(self, movement):
         self.rect.move(movement)
