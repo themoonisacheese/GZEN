@@ -2,7 +2,7 @@ import pygame
 
 
 class DisplayableElement:
-    draw = True
+    display = True
     __timeSinceLastAnimation = 0
     __currentAnimationFrameIndex = 0
     def __init__(self, animationFrames, animationFrameRate = 3):
@@ -12,7 +12,7 @@ class DisplayableElement:
         self.animationFrameRate = animationFrameRate
 
     def draw(self, screen):
-        if self.draw:
+        if self.display:
             screen.blit(self.currentTexture, self.rect)
 
     def moveto(self, pos):
@@ -22,13 +22,15 @@ class DisplayableElement:
         self.rect = self.rect.move(movement)
 
     def animate(self, clocktick):
-        self.__timeSinceLastAnimation += clocktick
-        if self.__timeSinceLastAnimation > (1/self.animationFrameRate * 1000):
-            self.__timeSinceLastAnimation = 0
-            self.__currentAnimationFrameIndex +=1
-            if self.__currentAnimationFrameIndex >= len(self.animationFrames):
-                self.__currentAnimationFrameIndex = 0
-            self.currentTexture = self.animationFrames[self.__currentAnimationFrameIndex]
+        if self.display:
+            self.__timeSinceLastAnimation += clocktick
+            if self.__timeSinceLastAnimation > (1/self.animationFrameRate * 1000):
+                self.__timeSinceLastAnimation = 0
+                self.__currentAnimationFrameIndex +=1
+                if self.__currentAnimationFrameIndex >= len(self.animationFrames):
+                    self.__currentAnimationFrameIndex = 0
+                if self.currentTexture is not self.animationFrames[self.__currentAnimationFrameIndex]:
+                    self.currentTexture = self.animationFrames[self.__currentAnimationFrameIndex]
 
     def changeAnimation(self, newAnimation, animationFrameRate =3):
         self.animationFrameRate = animationFrameRate
