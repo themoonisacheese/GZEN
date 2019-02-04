@@ -22,9 +22,7 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-        # TODO:process keypresses etc
         if event.type == pygame.KEYDOWN:
-
             if event.key in upkeys:
                 print("up")
             elif event.key in rightkeys:
@@ -33,7 +31,6 @@ while 1:
                 print("left")
             elif event.key == pygame.K_SPACE:
                 print("Jump !")
-
 
     dep = 2, 2
     disElems[1].move(dep)
