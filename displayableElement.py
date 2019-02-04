@@ -1,5 +1,6 @@
 import pygame
-import sys
+
+
 class DisplayableElement:
     draw = True
     __timeSinceLastAnimation = 0

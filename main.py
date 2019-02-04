@@ -1,7 +1,8 @@
-import sys, pygame
+import pygame
+import sys
+
 from displayableElement import DisplayableElement
 from screenmanager import ScreenManager
-from array import array
 from animationAggregator import aggregateAnim
 pygame.init()
 size = width, height = 1280, 720
