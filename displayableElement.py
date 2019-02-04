@@ -23,13 +23,14 @@ class DisplayableElement:
 
     def animate(self, clocktick):
         self.__timeSinceLastAnimation += clocktick
-        if self.__timeSinceLastAnimation >= (1/self.animationFrameRate):
+        if self.__timeSinceLastAnimation > (1/self.animationFrameRate * 1000):
+            self.__timeSinceLastAnimation = 0
             self.__currentAnimationFrameIndex +=1
             if self.__currentAnimationFrameIndex >= len(self.animationFrames):
                 self.__currentAnimationFrameIndex = 0
             self.currentTexture = self.animationFrames[self.__currentAnimationFrameIndex]
 
-    def changeAnimation(self, newAnimation, animationFrameRate):
+    def changeAnimation(self, newAnimation, animationFrameRate =3):
         self.animationFrameRate = animationFrameRate
         self.animationFrames = newAnimation
         self.__currentAnimationFrameIndex = 0;

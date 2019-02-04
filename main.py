@@ -11,7 +11,7 @@ pygame.init()
 size = width, height = 1280, 720
 SM = ScreenManager(size)
 disElems = []
-disElems.append(DisplayableElement(aggregateAnim('sprites/bat/', 'bat_Animation'), 0.1))
+disElems.append(DisplayableElement(aggregateAnim('sprites/bat/', 'bat_Animation'), 3))
 clock = pygame.time.Clock()
 pygame.key.set_repeat(1, 500)
 while 1:
