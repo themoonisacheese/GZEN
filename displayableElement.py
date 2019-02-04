@@ -1,7 +1,7 @@
 import pygame
-import sys
-class DisplayableElement:
 
+
+class DisplayableElement:
     draw = True
 
     @property
