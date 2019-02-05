@@ -16,10 +16,15 @@ pygame.font.init()
 size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
-time = 0
+time = 180
 pygame.key.set_repeat(1, 500)
 
-gameObjects = [Room('design niveaux/lvl1.png', 2), GravityObject((512, 128), aggregateAnim('sprites/character/', 'idle'), 0.5), TextElement('texte', 'Arial', 30, (0,0,255))] # text elements must be after everything else to ensure drawing order
+# text elements must be after everything else to ensure drawing order
+gameObjects = [
+    Room('design niveaux/lvl1.png', 2),
+    GravityObject((512, 128), aggregateAnim('sprites/character/', 'idle'), 0.5),
+    TextElement('texte', 'Arial', 30, (0, 0, 255))
+]
 
 for obj in gameObjects:
     obj.display = True
@@ -31,8 +36,8 @@ while 1:
     # Timer part
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000
-    time += seconds  # while time < 180...
-    gameObjects[-1].setText(str(clocktick)) #dirty adressing atm
+    time -= seconds  # while time < 180...
+    gameObjects[-1].setText(str(int(time)))  # dirty adressing atm
     # End timer part
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
