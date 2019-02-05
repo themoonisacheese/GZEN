@@ -1,5 +1,4 @@
 import pygame
-import numpy
 from wall import Wall
 from displayableElement import DisplayableElement
 
@@ -8,8 +7,6 @@ class Room(DisplayableElement):
         floordesign = pygame.image.load(floordesignPath)
         self.roomnumber=roomnumber
         self.roomBlocks=[]
-        pygame.surfarray.use_arraytype("numpy")
-        pix = pygame.surfarray.pixels3d(floordesign)
         for y in range(9):
             for x in range(16):
                 color = floordesign.get_at((x + (roomnumber*16), y))
