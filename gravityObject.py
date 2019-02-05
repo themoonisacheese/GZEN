@@ -19,7 +19,7 @@ class GravityObject(MovingObject):
                                 self.rect.left = block.rect.right
                             if self.movementVector[1] > 0:
                                 self.rect.bottom = block.rect.top
-                                self.movementVector[1] = 0
+                                self.movementVector = self.movementVector[0], self.movementVector[1] - self.movementVector[1]
                             if self.movementVector[1] < 0:
                                 self.rect.top = block.rect.bottom
-                                self.movementVector[1] = 0
+                                self.movementVector = self.movementVector[0], self.movementVector[1] - self.movementVector[1]
