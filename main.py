@@ -22,21 +22,21 @@ pygame.key.set_repeat(1, 500)
 
 # text elements must be after everything else to ensure drawing order
 gameObjects = [
-    Room('design niveaux/lvl1.png', 2),
+    Room('design niveaux/lvl1.png', 0),
     GravityObject((512, 128), aggregateAnim('sprites/character/', 'idle'), 0.5),
     TextElement('texte', 'Arial', 30, (0, 0, 255))
 ]
 
 for obj in gameObjects:
     obj.display = True
-gameObjects[1].movementVector = (20, 5)
+gameObjects[1].movementVector = (20, 0)
 gameObjects[0].show(True)
 
 while 1:
     clocktick = clock.tick(60)  # on peut multiplier toutes les vitesses par ca pour les adapater au framerate
     # Timer part
     # Start this when someone clicks on play or whatever
-    seconds = clocktick/1000
+    seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
     gameObjects[-1].setText(str(int(time)))  # dirty adressing atm
     # End timer part
