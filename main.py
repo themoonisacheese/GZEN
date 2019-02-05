@@ -17,6 +17,7 @@ size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 180
+score = 0
 pygame.key.set_repeat(1, 500)
 
 # text elements must be after everything else to ensure drawing order
@@ -43,7 +44,7 @@ while 1:
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            processInputs(event)
+            processInputs(clocktick, event, gameObjects[1])
 
     for obj in gameObjects:
         obj.animate(clocktick)
