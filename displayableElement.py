@@ -34,3 +34,5 @@ class DisplayableElement:
         self.animationFrameRate = animationFrameRate
         self.animationFrames = newAnimation
         self.__currentAnimationFrameIndex = 0
+        self.currentTexture = self.animationFrames[0]
+        self.rect = self.currentTexture.get_rect()
