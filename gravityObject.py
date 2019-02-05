@@ -3,7 +3,7 @@ from movingObject import MovingObject
 
 
 class GravityObject(MovingObject):
-    def __init__(self, position, animationFrames, animationFrameRate =3):
+    def __init__(self, position, animationFrames, animationFrameRate=3):
         MovingObject.__init__(self, position, animationFrames, animationFrameRate)
 
     def update(self, ticktime, objlist):
