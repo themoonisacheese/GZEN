@@ -10,7 +10,7 @@ class GravityObject(MovingObject):
         MovingObject.update(self, ticktime, objlist)
         for obj in objlist:
             if self.isColliding(obj):
-                if obj.__class__name == 'Wall': #FIXME: this code probably wraps your to the top of a block if you try jumping into it.
+                if obj.__class__name == 'Wall':  # FIXME: this code probably wraps your to the top of a block if you try jumping into it.
                     if self.movementVector[0] > 0:
                         self.rect.right = obj.rect.left
                     if self.movementVector[0] < 0:

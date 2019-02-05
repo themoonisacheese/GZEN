@@ -44,7 +44,7 @@ while 1:
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            processInputs(event, gameObjects[1])
+            processInputs(clocktick, event, gameObjects[1])
 
     for obj in gameObjects:
         obj.animate(clocktick)
