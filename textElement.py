@@ -1,8 +1,9 @@
 import pygame
 from displayableElement import DisplayableElement
 
-class TextElement(DisplayableElement): #enjoys the moving methods of DisplayableElement
-    def __init__(self, text, font, fontsize, color=(255,255,255)):
+
+class TextElement(DisplayableElement):  # enjoys the moving methods of DisplayableElement
+    def __init__(self, text, font, fontsize, color=(255, 255, 255)):
         self.font = pygame.font.SysFont(font, fontsize)
         self.color = color
         self.text = text
