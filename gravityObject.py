@@ -24,4 +24,9 @@ class GravityObject(MovingObject):
                                 self.movementVector = 0, self.movementVector[1]
                             if block.rect.collidepoint(self.rect.left, self.rect.centery):
                                 self.rect.left = block.rect.right
-                                self.movementVector = 0, self.movementVector[1]
+                            if self.movementVector[1] > 0:
+                                self.rect.bottom = block.rect.top
+                                self.movementVector = self.movementVector[0], self.movementVector[1] - self.movementVector[1]
+                            if self.movementVector[1] < 0:
+                                self.movementVector = self.movementVector[0], self.movementVector[1] - self.movementVector[1]
+                                self.rect.top = block.rect.bottom
