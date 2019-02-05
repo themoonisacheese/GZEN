@@ -27,6 +27,7 @@ while 1:
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000
     time += seconds  # while time < 180...
+    print(time)
     font = pygame.font.Font(None, 18)
     timeleft = font.render(str(time), 1, (0, 0, 255))  # how to display ??
     # End timer part
