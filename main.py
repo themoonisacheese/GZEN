@@ -29,14 +29,14 @@ gameObjects = [
 
 for obj in gameObjects:
     obj.display = True
-gameObjects[1].movementVector = (20, 5)
+gameObjects[1].movementVector = (40, 0)
 gameObjects[0].show(True)
 
 while 1:
     clocktick = clock.tick(60)  # on peut multiplier toutes les vitesses par ca pour les adapater au framerate
     # Timer part
     # Start this when someone clicks on play or whatever
-    seconds = clocktick/1000
+    seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
     gameObjects[-1].setText(str(int(time)))  # dirty adressing atm
     # End timer part
