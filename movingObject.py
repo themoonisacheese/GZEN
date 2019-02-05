@@ -1,8 +1,9 @@
-import pygame
 from collisionObject import CollisionObject
 
+
 class MovingObject(CollisionObject):
-    movementVector = 0,0 #in pixels per second
+    movementVector = 0,0  # in pixels per second
+
     def __init__(self, position, animationFrames, animationFrameRate = 3):
         CollisionObject.__init__(self, position, animationFrames, animationFrameRate)
 
