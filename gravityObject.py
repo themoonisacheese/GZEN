@@ -12,16 +12,16 @@ class GravityObject(MovingObject):
             if obj.__class__.__name__ == 'Room':
                 for block in obj.roomBlocks:
                     if self.isColliding(block):
-                        if block.__class__.__name__ == 'Wall': #FIXME: this code probably wraps you to the top of a block if you try jumping into it.
-                            if self.movementVector[0] > 0:
-                                self.rect.right = block.rect.left
-                                self.movementVector = 0, self.movementVector[1]
-                            if self.movementVector[0] < 0:
-                                self.rect.left = block.rect.right
-                                self.movementVector = 0, self.movementVector[1]
-                            if self.movementVector[1] > 0:
+                        if block.__class__.__name__ == 'Wall':
+                            if block.rect.collidepoint(self.rect.right, self.rect.bottom) or block.rect.collidepoint(self.rect.left, self.rect.bottom):
                                 self.rect.bottom = block.rect.top
                                 self.movementVector = self.movementVector[0], 0
-                            if self.movementVector[1] < 0:
+                            if block.rect.collidepoint(self.rect.centerx, self.rect.top):
                                 self.rect.top = block.rect.bottom
                                 self.movementVector = self.movementVector[0], 0
+                            if block.rect.collidepoint(self.rect.right, self.rect.centery):
+                                self.rect.right = block.rect.left
+                                self.movementVector = 0, self.movementVector[1]
+                            if block.rect.collidepoint(self.rect.left, self.rect.centery):
+                                self.rect.left = block.rect.right
+                                self.movementVector = 0, self.movementVector[1]
