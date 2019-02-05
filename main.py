@@ -48,4 +48,5 @@ while 1:
 
     for obj in gameObjects:
         obj.animate(clocktick)
+        obj.update(clocktick, gameObjects)
     SM.displayElements(gameObjects)
