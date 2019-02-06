@@ -1,10 +1,11 @@
 import pygame
 from wall import Wall
 from spike import Spike
+from coin import Coin
 from displayableElement import DisplayableElement
 
 class Room(DisplayableElement):
-    def __init__(self, floordesignPath, roomnumber): #FIXME: every color is 0,0,0 apparently.
+    def __init__(self, floordesignPath, roomnumber): #FIXME: les couleurs dans design niveaux ne sont pas homogenes.
         floordesign = pygame.image.load(floordesignPath)
         self.roomnumber=roomnumber
         self.roomBlocks=[]
@@ -25,6 +26,8 @@ class Room(DisplayableElement):
                         self.roomBlocks.append(Spike((x,y), 2))
                     else:
                         self.roomBlocks.append(Spike((x,y)))
+                elif color == (18, 189, 99, 255):
+                    self.roomBlocks.append(Coin((x,y)))
 
 
     def draw(self, screen):

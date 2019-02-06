@@ -55,17 +55,21 @@ class Player(GravityObject):
         if self.isOnTheGround:
             self.addToVec(0, -300 * self.upgrades.jumpingHeight)
             self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'jumping'), self.facingLeft), 10)
+            stopHitting(self)
 
     def startWalking(self, left):
         self.facingLeft = left
         self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'walking'), left) 5)
+        stopHitting(self)
 
     def startRunning(self, left):
         self.facingLeft = left
         self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'running'), left) 5)
+        stopHitting(self)
 
     def stopMoving(self):
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'idle'), left) 5)
+        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'idle'), left) 5
+        stopHitting(self)
 
 
 def stopHitting(obj):
