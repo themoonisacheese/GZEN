@@ -11,7 +11,8 @@ def processInputs(clocktick, event, char):  # event.type is guaranteed to be pyg
     if event.key in upkeys:
         # print(char.movementVector)
         # print("up")
-        char.movementVector = char.movementVector[0], char.movementVector[1] - 628 * (clocktick/1000)
+        char.addToVec(0, -600)
+        # char.movementVector = char.movementVector[0], char.movementVector[1] - 628 * (clocktick/1000)
         # print(char.movementVector)
     elif event.key in rightkeys:
         # print(char.movementVector)
