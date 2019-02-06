@@ -31,9 +31,7 @@ gameObjects = [
 
 for obj in gameObjects:
     obj.display = True
-gameObjects[1].movementVector = (0, 0)
 gameObjects[0].show(True)
-# gameObjects[2].moveto()
 
 while 1:
     clocktick = clock.tick(60)  # on peut multiplier toutes les vitesses par ca pour les adapater au framerate
