@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from animationAggregator import aggregateAnim
+from displayableElement import DisplayableElement
 from inputManager import processInputs
 from screenmanager import ScreenManager
 from textElement import TextElement
@@ -24,6 +25,7 @@ pygame.key.set_repeat(1, 200)
 gameObjects = [
     Room('design niveaux/lvl1.png', 2),
     GravityObject((512, 128), aggregateAnim('sprites/character/', 'running'), 3.0),
+    DisplayableElement(aggregateAnim('sprites/environment', 'RECTANGLE')),
     TextElement('texte', 'Calibri', 40, (189, 18, 18))
 ]
 
@@ -31,6 +33,7 @@ for obj in gameObjects:
     obj.display = True
 gameObjects[1].movementVector = (-40, 0)
 gameObjects[0].show(True)
+# gameObjects[2].moveto()
 
 while 1:
     clocktick = clock.tick(60)  # on peut multiplier toutes les vitesses par ca pour les adapater au framerate
@@ -40,6 +43,7 @@ while 1:
     time -= seconds  # while time < 180...
     timeleft = str(int(time)) + "s left ! "
     gameObjects[-1].setText(timeleft)  # dirty adressing atm
+    gameObjects[-1].moveto((90, 20))
     # End timer part
     # Score part
     # print("oui")
