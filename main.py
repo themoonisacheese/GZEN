@@ -25,8 +25,8 @@ pygame.key.set_repeat(1, 200)
 gameObjects = [
     Room('design niveaux/lvl1.png', 2),
     GravityObject((512, 128), aggregateAnim('sprites/character/', 'running'), 3.0),
-    DisplayableElement(aggregateAnim('sprites/environment', 'RECTANGLE')),
-    TextElement('texte', 'Calibri', 40, (189, 18, 18))
+    DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')),
+    TextElement('texte', 'Calibri-bold', 45, (229, 0, 0))
 ]
 
 for obj in gameObjects:
@@ -39,9 +39,9 @@ while 1:
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
-    timeleft = str(int(time)) + "s left ! "
+    timeleft = str(int(time)) + "s left!"
     gameObjects[-1].setText(timeleft)  # dirty adressing atm
-    gameObjects[-1].moveto((100, 25))
+    gameObjects[-1].moveto((98, 26))
     # End timer part
     # Score part
     # print("oui")
