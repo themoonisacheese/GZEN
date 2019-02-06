@@ -1,10 +1,13 @@
 import pygame
 from wall import Wall
 from spike import Spike
+from coin import Coin
+from bat import Bat
+from backwall import BackWall
 from displayableElement import DisplayableElement
 
 class Room(DisplayableElement):
-    def __init__(self, floordesignPath, roomnumber): #FIXME: every color is 0,0,0 apparently.
+    def __init__(self, floordesignPath, roomnumber, floorNumber): #FIXME: les couleurs dans design niveaux ne sont pas homogenes.
         floordesign = pygame.image.load(floordesignPath)
         self.roomnumber=roomnumber
         self.roomBlocks=[]
@@ -25,6 +28,17 @@ class Room(DisplayableElement):
                         self.roomBlocks.append(Spike((x,y), 2))
                     else:
                         self.roomBlocks.append(Spike((x,y)))
+                elif color == (18, 189, 99, 255):
+                    self.roomBlocks.append(Coin((x,y)))
+                elif color == (189, 18, 18, 255):
+                    #enemy
+                    if floordesign.get_at((x + (roomnumber*16), y+1)) == (0,0,0,255):
+                        #slime
+                        pass
+                    else:
+                        #bat
+                        self.roomBlocks.append(Bat((x,y)))
+
 
 
     def draw(self, screen):
@@ -43,6 +57,9 @@ class Room(DisplayableElement):
         if self.display:
             for block in self.roomBlocks:
                 block.animate(clocktick)
+    def update(self, ticktime, objlist):
+        for obj in self.roomBlocks:
+            obj.update(ticktime, objlist)
 
     def changeAnimation(self, newAnimation, animationFrameRate):
         raise AssertionError('cannot change animation on a room!')

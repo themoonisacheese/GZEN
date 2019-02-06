@@ -8,9 +8,10 @@ class Spike(GridAlignedObject):
         GridAlignedObject.__init__(self, gridPosition, self.__spinList(aggregateAnim('sprites/environment/', 'spike_f0'), facing), 0.001)
         self.facing = facing
 
-    # def animate(self, clocktick):
-        if (not self.isInTempAnim) and random.random() > 0.99:
-            self.changeAnimationTemp(self.__spinList(aggregateAnim('sprites/environment/', 'spike'), self.facing), 3)
+    def animate(self, clocktick):
+        if (not self.isInTempAnim) and random.random() > 0.999:
+            self.changeAnimationTemp(self.__spinList(aggregateAnim('sprites/environment/', 'spike'), self.facing), 10)
+        GridAlignedObject.animate(self, clocktick)
 
     def __spinList(self, animList, facing):
         tempList = []
