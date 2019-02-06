@@ -48,9 +48,10 @@ class DisplayableElement:
         self.rect = self.currentTexture.get_rect()
         self.rect.center = OGPOS
 
-#this changes the animation for one loop. after the loop, the original animation will be restored and callback(self) will be called
-#if no callback is provided, the animation will resume normally and not call anything else
-    def changeAnimationTemp(self, tempAnimation, animationFrameRate, callback = donothing): #callback must be a function that takes 1 argument: the object that called it.
+# this changes the animation for one loop. after the loop, the original animation will be restored and callback(self) will be called
+# if no callback is provided, the animation will resume normally and not call anything else
+    # callback must be a function that takes 1 argument: the object that called it.
+    def changeAnimationTemp(self, tempAnimation, animationFrameRate, callback = donothing):
         self.__originalAnimation = self.animationFrames
         self.__originalFR = self.animationFrameRate
         self.__tempAnimCallBack = callback
