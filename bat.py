@@ -33,7 +33,6 @@ class Bat(MovingObject, GridAlignedObject):
                 #calculate the direction he is in
                 playerDirection = pygame.math.Vector2( player.rect.centerx - self.rect.centerx, player.rect.centery - self.rect.centery)
                 #normalize
-                print(playerDirection)
                 tempvec = pygame.math.Vector2(self.movementVector[0] + playerDirection.x, self.movementVector[1] + playerDirection.y)
                 tempvec.scale_to_length(self.speed)
                 self.changeVec((tempvec.x, tempvec.y))
