@@ -11,18 +11,18 @@ def processInputs(clocktick, event, char):  # event.type is guaranteed to be pyg
     if event.key in upkeys:
         # print(char.movementVector)
         # print("up")
-        char.addToVec(0, -600)
+        char.addToVec(0, -300)
         # char.movementVector = char.movementVector[0], char.movementVector[1] - 628 * (clocktick/1000)
         # print(char.movementVector)
     elif event.key in rightkeys:
         # print(char.movementVector)
         # print("right")
-        char.movementVector = char.movementVector[0] - 16, char.movementVector[1]
+        char.movementVector = char.movementVector[0] - 32, char.movementVector[1]
         # print(char.movementVector)
     elif event.key in leftkeys:
         # print(char.movementVector)
         # print("left")
-        char.movementVector = char.movementVector[0] + 16, char.movementVector[1]
+        char.movementVector = char.movementVector[0] + 32, char.movementVector[1]
         # print(char.movementVector)
     elif event.key == pygame.K_ESCAPE:
         print("Quitting game...")
