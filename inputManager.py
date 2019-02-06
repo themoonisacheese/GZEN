@@ -29,7 +29,7 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
     elif event.key in leftkeys:
         # print(char.movementVector)
         # print("left")
-        if char.movementVector[0] < 0:
+        if char.movementVector[0] <= 0:
             char.movementVector = char.movementVector[0] + 64, char.movementVector[1]
             # x = 64
         elif 0 < char.movementVector[0] < 208:
