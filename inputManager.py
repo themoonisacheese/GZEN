@@ -37,6 +37,8 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
             # x = 32
         # print(char.movementVector)
         # print('Val ajoutée : ' + str(x))
+    elif event.key == pygame.K_f:
+        print("cc")  # attack
     elif event.key == pygame.K_ESCAPE:
         print("Quitting game...")
         sys.exit()
