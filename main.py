@@ -29,7 +29,6 @@ gameObjects = [
 
 for obj in gameObjects:
     obj.display = True
-gameObjects[1].movementVector = (-40, 0)
 gameObjects[0].show(True)
 
 while 1:

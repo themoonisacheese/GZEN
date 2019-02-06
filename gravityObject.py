@@ -14,7 +14,7 @@ class GravityObject(MovingObject):
                 for block in obj.roomBlocks:
                     if self.isColliding(block):
                         if block.__class__.__name__ == 'Wall':
-                            if block.rect.collidepoint(self.rect.right, self.rect.bottom) or block.rect.collidepoint(self.rect.left, self.rect.bottom):
+                            if (block.rect.collidepoint(self.rect.right, self.rect.bottom) or block.rect.collidepoint(self.rect.left, self.rect.bottom)) and not (block.rect.collidepoint(self.rect.right, self.rect.centery) or block.rect.collidepoint(self.rect.left, self.rect.centery)):
                                 self.rect.bottom = block.rect.top
                                 self.movementVector = self.movementVector[0], 0
                             elif block.rect.collidepoint(self.rect.centerx, self.rect.top):
