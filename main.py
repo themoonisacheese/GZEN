@@ -31,7 +31,7 @@ gameObjects = [
 
 for obj in gameObjects:
     obj.display = True
-gameObjects[1].movementVector = (-40, 0)
+gameObjects[1].movementVector = (0, 0)
 gameObjects[0].show(True)
 # gameObjects[2].moveto()
 
@@ -43,7 +43,7 @@ while 1:
     time -= seconds  # while time < 180...
     timeleft = str(int(time)) + "s left ! "
     gameObjects[-1].setText(timeleft)  # dirty adressing atm
-    gameObjects[-1].moveto((90, 20))
+    gameObjects[-1].moveto((100, 25))
     # End timer part
     # Score part
     # print("oui")
@@ -51,7 +51,7 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
             processInputs(event, gameObjects[1])
 
     for obj in gameObjects:
