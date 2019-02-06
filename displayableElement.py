@@ -27,7 +27,7 @@ class DisplayableElement:
     def animate(self, clocktick):
         if self.display:
             self.__timeSinceLastAnimation += clocktick
-            if self.__timeSinceLastAnimation > (1/self.animationFrameRate * 1000):
+            if self.__timeSinceLastAnimation > (1.0/self.animationFrameRate * 1000):
                 self.__timeSinceLastAnimation = 0
                 self.__currentAnimationFrameIndex += 1
                 if self.__currentAnimationFrameIndex >= len(self.animationFrames):
@@ -39,12 +39,14 @@ class DisplayableElement:
                     self.currentTexture = self.animationFrames[self.__currentAnimationFrameIndex]
 
     def changeAnimation(self, newAnimation, animationFrameRate=3):
+        OGPOS = self.rect.center
         self.isInTempAnim = False
         self.animationFrameRate = animationFrameRate
         self.animationFrames = newAnimation
         self.__currentAnimationFrameIndex = 0
         self.currentTexture = self.animationFrames[0]
         self.rect = self.currentTexture.get_rect()
+        self.rect.center = OGPOS
 
 #this changes the animation for one loop. after the loop, the original animation will be restored and callback(self) will be called
 #if no callback is provided, the animation will resume normally and not call anything else
@@ -52,10 +54,9 @@ class DisplayableElement:
         self.__originalAnimation = self.animationFrames
         self.__originalFR = self.animationFrameRate
         self.__tempAnimCallBack = callback
-        self.isInTempAnim = True
-        OGPOS = self.rect.center
         self.changeAnimation(tempAnimation, animationFrameRate)
-        self.moveto(OGPOS)
+        self.isInTempAnim = True #this needs to be after changeanimation.
+
 
     def update(self, ticktime, objlist):
         pass
