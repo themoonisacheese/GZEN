@@ -17,17 +17,17 @@ class GravityObject(MovingObject):
                             if block.rect.collidepoint(self.rect.right, self.rect.bottom) or block.rect.collidepoint(self.rect.left, self.rect.bottom):
                                 self.rect.bottom = block.rect.top
                                 self.movementVector = self.movementVector[0], 0
-                            if block.rect.collidepoint(self.rect.centerx, self.rect.top):
+                            elif block.rect.collidepoint(self.rect.centerx, self.rect.top):
                                 self.rect.top = block.rect.bottom
                                 self.movementVector = self.movementVector[0], 0
-                            if block.rect.collidepoint(self.rect.right, self.rect.centery):
+                            elif block.rect.collidepoint(self.rect.right, self.rect.centery):
                                 self.rect.right = block.rect.left
                                 self.movementVector = 0, self.movementVector[1]
-                            if block.rect.collidepoint(self.rect.left, self.rect.centery):
+                            elif block.rect.collidepoint(self.rect.left, self.rect.centery):
                                 self.rect.left = block.rect.right
-                            if self.movementVector[1] > 0:
+                            elif self.movementVector[1] > 0:
                                 self.rect.bottom = block.rect.top
                                 self.movementVector = self.movementVector[0], self.movementVector[1] - self.movementVector[1]
-                            if self.movementVector[1] < 0:
+                            elif self.movementVector[1] < 0:
                                 self.movementVector = self.movementVector[0], self.movementVector[1] - self.movementVector[1]
                                 self.rect.top = block.rect.bottom
