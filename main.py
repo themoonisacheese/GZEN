@@ -9,6 +9,7 @@ from textElement import TextElement
 
 from room import Room
 from player import Player
+from backwall import BackWall
 
 pygame.init()
 pygame.font.init()
@@ -21,15 +22,18 @@ score = 0
 pygame.key.set_repeat(1, 200)
 
 # text elements must be after everything else to ensure drawing order
-gameObjects = [
-    Room('design niveaux/lvl1.png', 2),
-    Player(),
-    TextElement('texte', 'Calibri', 40, (189, 18, 18))
-]
+gameObjects = []
+for x in range(16):
+    for y in range(9):
+        gameObjects.append(BackWall((x,y)))
+
+gameObjects.append(Room('design niveaux/lvl1.png', 4, 1))
+gameObjects.append(Player())
+gameObjects.append(TextElement('texte', 'Calibri', 40, (189, 18, 18)))
 
 for obj in gameObjects:
     obj.display = True
-gameObjects[0].show(True)
+gameObjects[-3].show(True)
 
 while 1:
     clocktick = clock.tick(60)  # on peut multiplier toutes les vitesses par ca pour les adapater au framerate
@@ -47,7 +51,7 @@ while 1:
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            processInputs(event, gameObjects[1])
+            processInputs(event, gameObjects[-2])
 
     for obj in gameObjects:
         obj.animate(clocktick)

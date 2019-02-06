@@ -11,26 +11,26 @@ class Player(GravityObject):
     def update(self, ticktime, objlist):
         self.timeSinceLastSwing += ticktime/1000.0
         GravityObject.update(self,ticktime, objlist)
-        for obj in objlist:
-            if obj.__class__.__name__ == 'Room':
-                for block in obj.roomBlocks:
-                    if self.isColliding(block):
-                        if block.__class__.__name__ == 'Coin':
-                            #add score, delete the coin
-                            pass
-                        elif block.__class__.__name__ == 'Meat':
-                            #add score, delete the meat
-                            pass
-                        elif block.__class__.__name__ == 'Spike':
-                            #remove Score
-                            pass
-                        elif issubclass(block.__class__, Slime) or issubclass(block.__class__, Bat): #test root class of enemies, to accomodate different enemy levels.
-                            if self.isSwingingSword:
-                                #damage the enemy
-                                pass
-                            else:
-                                #remove score, knockback?
-                                pass
+        # for obj in objlist:
+        #     if obj.__class__.__name__ == 'Room':
+        #         for block in obj.roomBlocks:
+        #             if self.isColliding(block):
+        #                 if block.__class__.__name__ == 'Coin':
+        #                     #add score, delete the coin
+        #                     pass
+        #                 elif block.__class__.__name__ == 'Meat':
+        #                     #add score, delete the meat
+        #                     pass
+        #                 elif block.__class__.__name__ == 'Spike':
+        #                     #remove Score
+        #                     pass
+        #                 elif issubclass(block.__class__, Slime) or issubclass(block.__class__, Bat): #test root class of enemies, to accomodate different enemy levels.
+        #                     if self.isSwingingSword:
+        #                         #damage the enemy
+        #                         pass
+        #                     else:
+        #                         #remove score, knockback?
+        #                         pass
 
     def flipList(self, listToFlip, flip):
         templist = []
@@ -59,16 +59,16 @@ class Player(GravityObject):
 
     def startWalking(self, left):
         self.facingLeft = left
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'walking'), left) 5)
+        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'walking'), left), 5)
         stopHitting(self)
 
     def startRunning(self, left):
         self.facingLeft = left
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'running'), left) 5)
+        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'running'), left), 5)
         stopHitting(self)
 
     def stopMoving(self):
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'idle'), left) 5
+        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'idle'), left), 5)
         stopHitting(self)
 
 
