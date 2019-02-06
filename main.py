@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from animationAggregator import aggregateAnim
+from displayableElement import DisplayableElement
 from inputManager import processInputs
 from screenmanager import ScreenManager
 from textElement import TextElement
@@ -41,8 +42,9 @@ while 1:
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
-    timeleft = str(int(time)) + "s left ! "
+    timeleft = str(int(time)) + "s left!"
     gameObjects[-1].setText(timeleft)  # dirty adressing atm
+    gameObjects[-1].moveto((98, 26))
     # End timer part
     # Score part
     # print("oui")
@@ -50,7 +52,7 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
             processInputs(event, gameObjects[-2])
 
     for obj in gameObjects:
