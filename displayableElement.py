@@ -1,5 +1,10 @@
+def donothing(obj):
+    pass
+
+
 class DisplayableElement:
     display = True
+    isInTempAnim = False
     __timeSinceLastAnimation = 0
     __currentAnimationFrameIndex = 0
 
@@ -26,16 +31,31 @@ class DisplayableElement:
                 self.__timeSinceLastAnimation = 0
                 self.__currentAnimationFrameIndex += 1
                 if self.__currentAnimationFrameIndex >= len(self.animationFrames):
+                    if self.isInTempAnim:
+                        self.changeAnimation(self.__originalAnimation, self.__originalFR)
+                        self.__tempAnimCallBack(self)
                     self.__currentAnimationFrameIndex = 0
                 if self.currentTexture is not self.animationFrames[self.__currentAnimationFrameIndex]:
                     self.currentTexture = self.animationFrames[self.__currentAnimationFrameIndex]
 
     def changeAnimation(self, newAnimation, animationFrameRate=3):
+        self.isInTempAnim = False
         self.animationFrameRate = animationFrameRate
         self.animationFrames = newAnimation
         self.__currentAnimationFrameIndex = 0
         self.currentTexture = self.animationFrames[0]
         self.rect = self.currentTexture.get_rect()
+
+#this changes the animation for one loop. after the loop, the original animation will be restored and callback(self) will be called
+#if no callback is provided, the animation will resume normally and not call anything else
+    def changeAnimationTemp(self, tempAnimation, animationFrameRate, callback = donothing): #callback must be a function that takes 1 argument: the object that called it.
+        self.__originalAnimation = self.animationFrames
+        self.__originalFR = self.animationFrameRate
+        self.__tempAnimCallBack = callback
+        self.isInTempAnim = True
+        OGPOS = self.rect.center
+        self.changeAnimation(tempAnimation, animationFrameRate)
+        self.moveto(OGPOS)
 
     def update(self, ticktime, objlist):
         pass

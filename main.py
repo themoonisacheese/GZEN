@@ -23,13 +23,13 @@ pygame.key.set_repeat(1, 500)
 # text elements must be after everything else to ensure drawing order
 gameObjects = [
     Room('design niveaux/lvl1.png', 2),
-    GravityObject((512, 128), aggregateAnim('sprites/character/', 'idle'), 0.5),
+    GravityObject((512, 128), aggregateAnim('sprites/character/', 'running'), 3.0),
     TextElement('texte', 'Arial', 30, (0, 0, 255))
 ]
 
 for obj in gameObjects:
     obj.display = True
-gameObjects[1].movementVector = (40, 0)
+gameObjects[1].movementVector = (-40, 0)
 gameObjects[0].show(True)
 
 while 1:

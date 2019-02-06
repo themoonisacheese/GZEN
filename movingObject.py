@@ -17,6 +17,10 @@ class MovingObject(CollisionObject):
             self.__additiveVector = 0, self.__additiveVector[1]
         if self.__additiveVector[1] >= 1:
             self.__additiveVector = self.__additiveVector[0], 0
+        if self.__additiveVector[0] <=-1: 
+            self.__additiveVector = 0, self.__additiveVector[1]
+        if self.__additiveVector[1] <=-1:
+            self.__additiveVector = self.__additiveVector[0], 0
 
     def changeVec(self, newVec):
         self.movementVector = newVec
