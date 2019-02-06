@@ -38,7 +38,7 @@ while 1:
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
-    timeleft = "You have " + str(int(time)) + "s left ! "
+    timeleft = str(int(time)) + "s left ! "
     gameObjects[-1].setText(timeleft)  # dirty adressing atm
     # End timer part
     # Score part
