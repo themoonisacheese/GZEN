@@ -8,7 +8,7 @@ from screenmanager import ScreenManager
 from textElement import TextElement
 
 from room import Room
-from gravityObject import GravityObject
+from player import Player
 
 pygame.init()
 pygame.font.init()
@@ -23,7 +23,7 @@ pygame.key.set_repeat(1, 200)
 # text elements must be after everything else to ensure drawing order
 gameObjects = [
     Room('design niveaux/lvl1.png', 2),
-    GravityObject((512, 128), aggregateAnim('sprites/character/', 'running'), 3.0),
+    Player(),
     TextElement('texte', 'Calibri', 40, (189, 18, 18))
 ]
 
