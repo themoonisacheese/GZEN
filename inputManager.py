@@ -14,7 +14,7 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
         if event.key in upkeys:
             # print(char.movementVector)
             # print("up")
-            char.addToVec(0, -300)
+            char.addToVec(0, -400)
             # char.movementVector = char.movementVector[0], char.movementVector[1] - 628 * (clocktick/1000)
             # print(char.movementVector)
         elif event.key in rightkeys:
@@ -45,4 +45,5 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
             print("Quitting game...")
             sys.exit()
     elif event.type == pygame.KEYUP:
-        print("cc")
+        if event.key in leftkeys or event.key in rightkeys:
+            char.movementVector = char.movementVector = char.movementVector[0] - char.movementVector[0], char.movementVector[1]
