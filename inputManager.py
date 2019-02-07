@@ -22,11 +22,11 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
             # print(char.movementVector)
             # print("right")
             if char.movementVector[0] >= 0:
-                char.movementVector = char.movementVector[0] - 64, char.movementVector[1]
+                #char.movementVector = char.movementVector[0] - 64, char.movementVector[1]
                 char.startWalking(False)
                 # x = 64
             elif 0 > char.movementVector[0] > -208:
-                char.movementVector = char.movementVector[0] - 32, char.movementVector[1]
+                #char.movementVector = char.movementVector[0] - 32, char.movementVector[1]
                 char.startRunning(False)
                 # x = 32
             # print(char.movementVector)
@@ -38,7 +38,7 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
                 char.startWalking(True)
                 # x = 64
             elif 0 < char.movementVector[0] < 208:
-                char.movementVector = char.movementVector[0] + 32, char.movementVector[1]
+                #char.movementVector = char.movementVector[0] + 32, char.movementVector[1]
                 char.startRunning(True)
                 # x = 32
             # print(char.movementVector)
