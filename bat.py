@@ -3,15 +3,21 @@ from movingObject import MovingObject
 from gridAlignedObject import GridAlignedObject
 from animationAggregator import aggregateAnim
 
+
 class Bat(MovingObject, GridAlignedObject):
     hp = 1
     damage = 100
     speed = 160
     scanningInterval = 1.0
     __timesinceLastDirChange = 0.0
+
     def __init__(self, startingGridPos):
         GridAlignedObject.__init__(self, startingGridPos, aggregateAnim('sprites/mobs/', 'bat_f'), 20)
         self.move((0, 60))
+
+    def takeDamage(self, dmg):
+        self.hp = self.hp - dmg
+        pass
 
     def flipList(self, listToFlip, flip):
         templist = []
@@ -23,16 +29,16 @@ class Bat(MovingObject, GridAlignedObject):
         self.__timesinceLastDirChange += ticktime/1000.0
         if self.__timesinceLastDirChange > self.scanningInterval:
             self.__timesinceLastDirChange = 0.0
-            #find the player
+            # find the player
             player = None
             for obj in objlist:
                 if obj.__class__.__name__ == 'Player':
                     player = obj
                     break
             if player is not None:
-                #calculate the direction he is in
-                playerDirection = pygame.math.Vector2( player.rect.centerx - self.rect.centerx, player.rect.centery - self.rect.centery)
-                #normalize
+                # calculate the direction he is in
+                playerDirection = pygame.math.Vector2(player.rect.centerx - self.rect.centerx, player.rect.centery - self.rect.centery)
+                # normalize
                 tempvec = pygame.math.Vector2(self.movementVector[0] + playerDirection.x, self.movementVector[1] + playerDirection.y)
                 tempvec.scale_to_length(self.speed)
                 self.changeVec((tempvec.x, tempvec.y))
