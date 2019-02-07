@@ -5,6 +5,7 @@ from slime import Slime
 from gravityObject import GravityObject
 from animationAggregator import aggregateAnim
 from upgrades import Upgrades
+from chicken import Chicken
 
 
 class Player(GravityObject):
@@ -28,7 +29,10 @@ class Player(GravityObject):
                             # add score, delete the coin
                             pass
                         elif block.__class__.__name__ == 'Meat':
-                            # add score, delete the meat
+                            if block.pickupDelay <=0:
+                                self.score += 200
+                                block.destroy()
+                                obj.roomBlocks.remove(block)
                             pass
                         elif block.__class__.__name__ == 'Spike':
                             # remove Score
@@ -39,8 +43,11 @@ class Player(GravityObject):
                                 # damage the enemy
                                 block.takeDamage(1)
                                 if block.hp <= 0:
+                                    obj.roomBlocks.append(Chicken(block.rect.center))
                                     block.destroy()
                                     obj.roomBlocks.remove(block)
+
+
                             else:
                                 self.score = max(0, self.score - block.damage)
 
