@@ -37,6 +37,7 @@ gameObjects.append(TextElement('texte', 'Calibri', 40, (189, 18, 18)))
 for obj in gameObjects:
     obj.display = True
 gameObjects[-4].show(True)
+gameObjects[-3].setGravity(-1.0)
 
 while 1:
     clocktick = clock.tick(60)  # on peut multiplier toutes les vitesses par ca pour les adapater au framerate

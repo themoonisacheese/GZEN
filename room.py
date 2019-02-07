@@ -36,7 +36,6 @@ class Room(DisplayableElement):
                     #enemy
                     if floordesign.get_at((x + (roomnumber*16), y+1)) == (0,0,0,255):
                         self.roomBlocks.append(Slime((x,y)))
-                        pass
                     else:
                         # bat
                         self.roomBlocks.append(Bat((x, y)))
