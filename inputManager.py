@@ -12,33 +12,43 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
     global lastevent
     if event.type == pygame.KEYDOWN:
         if event.key in upkeys:
+            # print(char.movementVector)
+            # print("up")
+            # char.addToVec(0, -400)
             char.jump()
+            # char.movementVector = char.movementVector[0], char.movementVector[1] - 628 * (clocktick/1000)
+            # print(char.movementVector)
         elif event.key in rightkeys:
             char.startRunning(True)
             lastevent = True
             if char.movementVector[0] >= 0:
-                char.movementVector = char.movementVector[0] - 80, char.movementVector[1]
-            elif 0 > char.movementVector[0] > -280:
-                char.movementVector = char.movementVector[0] - 48, char.movementVector[1]
+                #char.movementVector = char.movementVector[0] - 64, char.movementVector[1]
+                char.startWalking(False)
+                # x = 64
+            elif 0 > char.movementVector[0] > -208:
+                #char.movementVector = char.movementVector[0] - 32, char.movementVector[1]
+                char.startRunning(False)
+                # x = 32
+            # print(char.movementVector)
+            # print('Val ajoutee : ' + str(x))
         elif event.key in leftkeys:
             char.startRunning(False)
             lastevent = False
             if char.movementVector[0] <= 0:
-                char.movementVector = char.movementVector[0] + 80, char.movementVector[1]
-            elif 0 < char.movementVector[0] < 280:
-                char.movementVector = char.movementVector[0] + 48, char.movementVector[1]
+                char.startWalking(True)
+                # x = 64
+            elif 0 < char.movementVector[0] < 208:
+                #char.movementVector = char.movementVector[0] + 32, char.movementVector[1]
+                char.startRunning(True)
+                # x = 32
+            # print(char.movementVector)
+            # print('Val ajoutee : ' + str(x))
         elif event.key == pygame.K_f:
-            char.lighHit(lastevent)
-        elif event.key == pygame.K_e:
-            print("gross atak")
-            # char.heavyHit()
+            char.lighHit()
         elif event.key == pygame.K_ESCAPE:
             print("Quitting game...")
             sys.exit()
     elif event.type == pygame.KEYUP:
-        if event.key in leftkeys:
-            char.stopMoving(False)
-            char.movementVector = char.movementVector = char.movementVector[0] - char.movementVector[0], char.movementVector[1]
-        if event.key in rightkeys:
-            char.stopMoving(True)
-            char.movementVector = char.movementVector = char.movementVector[0] - char.movementVector[0], char.movementVector[1]
+        if event.key in leftkeys or event.key in rightkeys:
+            char.movementVector = char.movementVector = 0, char.movementVector[1]
+            char.stopMoving()
