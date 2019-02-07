@@ -5,7 +5,7 @@ from animationAggregator import aggregateAnim
 
 
 class Bat(MovingObject, GridAlignedObject):
-    hp = 1
+    hp = 10
     damage = 100
     speed = 160
     scanningInterval = 1.0

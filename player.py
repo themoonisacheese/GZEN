@@ -9,6 +9,7 @@ from slime import Slime
 class Player(GravityObject):
     timeSinceLastSwing = 0
     facingLeft = True
+    score = 0
 
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
@@ -21,6 +22,9 @@ class Player(GravityObject):
                 for block in obj.roomBlocks:
                     if self.isColliding(block):
                         if block.__class__.__name__ == 'Coin':
+                            self.score = self.score + 100
+                            obj.roomBlocks.remove(block)
+                            print(str(self.score))
                             # add score, delete the coin
                             pass
                         elif block.__class__.__name__ == 'Meat':
@@ -36,7 +40,7 @@ class Player(GravityObject):
                                 block.takeDamage(1)
                                 print(str(block.hp))
                                 if block.hp <= 0:
-                                    block.display = False
+                                    obj.roomBlocks.remove(block)
                                 pass
                             else:
                                 # remove score, knockback?
