@@ -46,9 +46,15 @@ while 1:
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
+<<<<<<< HEAD
     timeleft = str(int(time)) + "s left!"
     gameObjects[-2].setText(timeleft)  # dirty adressing atm
     gameObjects[-2].moveto((98, 28))
+=======
+    timeleft = str(int(time)) + "s left"
+    gameObjects[-1].setText(timeleft)  # dirty adressing atm
+    gameObjects[-1].moveto((98, 28))
+>>>>>>> e2a6e46876f47738498565225363b90de2d85520
     # End timer part
     # Score part
     score = str(gameObjects[-5].score)
@@ -62,6 +68,7 @@ while 1:
         if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
             processInputs(event, gameObjects[-5])
 
+<<<<<<< HEAD
     #room handling
     if gameObjects[-5].rect.centerx > 1024:
         roomNumber += 1
@@ -70,14 +77,30 @@ while 1:
         gameObjects[-6] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
         gameObjects[-6].show(True)
         gameObjects[-5].rect.centerx = 0
+=======
+    # room handling
+    if gameObjects[-3].rect.centerx > 1024:
+        roomNumber += 1
+        if roomNumber >= 8:
+            roomNumber = 0
+        gameObjects[-4] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)  # FIXME
+        gameObjects[-4].show(True)
+        gameObjects[-3].rect.centerx = 0
+>>>>>>> e2a6e46876f47738498565225363b90de2d85520
 
     if gameObjects[-5].rect.centerx < 0:
         roomNumber -= 1
         if roomNumber <= -1:
             roomNumber = 7
+<<<<<<< HEAD
         gameObjects[-6] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
         gameObjects[-6].show(True)
         gameObjects[-5].rect.centerx = 1024
+=======
+        gameObjects[-4] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)  # FIXME
+        gameObjects[-4].show(True)
+        gameObjects[-3].rect.centerx = 1024
+>>>>>>> e2a6e46876f47738498565225363b90de2d85520
 
     for obj in gameObjects:
         obj.update(clocktick, gameObjects)
