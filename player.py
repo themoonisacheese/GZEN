@@ -38,11 +38,12 @@ class Player(GravityObject):
             templist.append(pygame.transform.flip(frame, flip, False))
         return templist
 
-    def lighHit(self):
+    def lighHit(self, left):
+        self.facingLeft = left
         if self.timeSinceLastSwing >= 0.5:
             self.timeSinceLastSwing = 0
             self.isSwingingSword = True
-            self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'light_attack'), self.facingLeft), 10, stopHitting)
+            self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'light_attack'), left), 10, stopHitting)
 
     def heavyHit(self):
         if self.upgrades.heavyHit:
