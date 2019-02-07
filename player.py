@@ -1,6 +1,7 @@
 import pygame
 
 from bat import Bat
+from slime import Slime
 from gravityObject import GravityObject
 from animationAggregator import aggregateAnim
 from upgrades import Upgrades
@@ -51,12 +52,11 @@ class Player(GravityObject):
             templist.append(pygame.transform.flip(frame, not flip, False))
         return templist
 
-    def lighHit(self, left):
-        self.facingLeft = left
+    def lighHit(self):
         if self.timeSinceLastSwing >= 0.5:
             self.timeSinceLastSwing = 0
             self.isSwingingSword = True
-            self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'light_attack'), left), 10, stopHitting)
+            self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'light_attack'), self.facingLeft), 10, stopHitting)
 
     def heavyHit(self):
         if self.upgrades.heavyHit:
@@ -73,9 +73,9 @@ class Player(GravityObject):
 
     def startWalking(self, left):
         if left:
-            self.addToVec(128, 0)
+            self.addToVec(128 * self.upgrades.walkingSpeed, 0)
         else:
-            self.addToVec(-128, 0)
+            self.addToVec(-128* self.upgrades.walkingSpeed, 0)
         if left != self.facingLeft:
             self.walking = True
             self.facingLeft = left
@@ -84,9 +84,9 @@ class Player(GravityObject):
 
     def startRunning(self, left):
         if left:
-            self.addToVec(64, 0)
+            self.addToVec(64* self.upgrades.walkingSpeed, 0)
         else:
-            self.addToVec(-64, 0)
+            self.addToVec(-64* self.upgrades.walkingSpeed, 0)
         if left != self.facingLeft or self.walking:
             self.walking = False
             self.facingLeft = left
