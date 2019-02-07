@@ -73,9 +73,9 @@ class Player(GravityObject):
 
     def startWalking(self, left):
         if left:
-            self.addToVec(64, 0)
+            self.addToVec(128, 0)
         else:
-            self.addToVec(-64, 0)
+            self.addToVec(-128, 0)
         if left != self.facingLeft:
             self.walking = True
             self.facingLeft = left
@@ -84,9 +84,9 @@ class Player(GravityObject):
 
     def startRunning(self, left):
         if left:
-            self.addToVec(32, 0)
+            self.addToVec(64, 0)
         else:
-            self.addToVec(-32, 0)
+            self.addToVec(-64, 0)
         if left != self.facingLeft or self.walking:
             self.walking = False
             self.facingLeft = left
