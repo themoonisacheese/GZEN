@@ -56,6 +56,6 @@ while 1:
             processInputs(event, gameObjects[-2])
 
     for obj in gameObjects:
-        obj.animate(clocktick)
         obj.update(clocktick, gameObjects)
+        obj.animate(clocktick)
     SM.displayElements(gameObjects)

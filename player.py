@@ -1,12 +1,16 @@
 import pygame
 from gravityObject import GravityObject
 from animationAggregator import aggregateAnim
+from upgrades import Upgrades
 
 class Player(GravityObject):
     timeSinceLastSwing = 0
     facingLeft = True
+    walking =False
+    score = 0
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
+        self.upgrades = Upgrades()
 
     def update(self, ticktime, objlist):
         self.timeSinceLastSwing += ticktime/1000.0
@@ -35,7 +39,7 @@ class Player(GravityObject):
     def flipList(self, listToFlip, flip):
         templist = []
         for frame in listToFlip:
-            templist.append(pygame.transform.flip(frame, flip, False))
+            templist.append(pygame.transform.flip(frame, not flip, False))
         return templist
 
     def lighHit(self):
@@ -52,23 +56,37 @@ class Player(GravityObject):
                 self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'strong_attack'), self.facingLeft), 10, stopHitting)
 
     def jump(self):
+        print(self.isOnTheGround)
         if self.isOnTheGround:
             self.addToVec(0, -300 * self.upgrades.jumpingHeight)
             self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'jumping'), self.facingLeft), 10)
             stopHitting(self)
 
     def startWalking(self, left):
-        self.facingLeft = left
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'walking'), left), 5)
-        stopHitting(self)
+        if left:
+            self.addToVec(64, 0)
+        else:
+            self.addToVec(-64, 0)
+        if left != self.facingLeft:
+            self.walking = True
+            self.facingLeft = left
+            self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'walking'), left), 5)
+            stopHitting(self)
 
     def startRunning(self, left):
-        self.facingLeft = left
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'running'), left), 5)
-        stopHitting(self)
+        if left:
+            self.addToVec(32, 0)
+        else:
+            self.addToVec(-32, 0)
+        if left != self.facingLeft or self.walking:
+            self.walking = False
+            self.facingLeft = left
+            self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'running'), left), 5)
+            stopHitting(self)
 
     def stopMoving(self):
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'idle'), left), 5)
+        self.walking = False
+        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'idle'), self.facingLeft), 5)
         stopHitting(self)
 
 

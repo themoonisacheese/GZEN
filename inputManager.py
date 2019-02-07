@@ -14,7 +14,8 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
         if event.key in upkeys:
             # print(char.movementVector)
             # print("up")
-            char.addToVec(0, -400)
+            # char.addToVec(0, -400)
+            char.jump()
             # char.movementVector = char.movementVector[0], char.movementVector[1] - 628 * (clocktick/1000)
             # print(char.movementVector)
         elif event.key in rightkeys:
@@ -22,9 +23,11 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
             # print("right")
             if char.movementVector[0] >= 0:
                 char.movementVector = char.movementVector[0] - 64, char.movementVector[1]
+                char.startWalking(False)
                 # x = 64
             elif 0 > char.movementVector[0] > -208:
                 char.movementVector = char.movementVector[0] - 32, char.movementVector[1]
+                char.startRunning(False)
                 # x = 32
             # print(char.movementVector)
             # print('Val ajoutee : ' + str(x))
@@ -32,18 +35,20 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
             # print(char.movementVector)
             # print("left")
             if char.movementVector[0] <= 0:
-                char.movementVector = char.movementVector[0] + 64, char.movementVector[1]
+                char.startWalking(True)
                 # x = 64
             elif 0 < char.movementVector[0] < 208:
                 char.movementVector = char.movementVector[0] + 32, char.movementVector[1]
+                char.startRunning(True)
                 # x = 32
             # print(char.movementVector)
             # print('Val ajoutee : ' + str(x))
         elif event.key == pygame.K_f:
-            print("atak")  # attack
+            char.lighHit()
         elif event.key == pygame.K_ESCAPE:
             print("Quitting game...")
             sys.exit()
     elif event.type == pygame.KEYUP:
         if event.key in leftkeys or event.key in rightkeys:
-            char.movementVector = char.movementVector = char.movementVector[0] - char.movementVector[0], char.movementVector[1]
+            char.movementVector = char.movementVector = 0, char.movementVector[1]
+            char.stopMoving()
