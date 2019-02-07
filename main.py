@@ -28,7 +28,7 @@ for x in range(16):
     for y in range(9):
         gameObjects.append(BackWall((x,y)))
 
-gameObjects.append(Room('design niveaux/lvl1.png', roomNumber, floorNumber))
+gameObjects.append(Room(roomNumber, floorNumber))
 gameObjects.append(Player())
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(TextElement('texte', 'Calibri', 40, (189, 18, 18)))

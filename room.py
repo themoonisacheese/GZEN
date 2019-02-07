@@ -20,7 +20,7 @@ class Room(DisplayableElement):
             floordesignPath = 'design niveaux/lvl4(antigrav).png'
         elif floorNumer == 5:
             floordesignPath = 'design niveaux/lvl5.png'
-        
+
         floordesign = pygame.image.load(floordesignPath)
         self.roomnumber=roomnumber
         self.roomBlocks=[]
@@ -50,8 +50,6 @@ class Room(DisplayableElement):
                     else:
                         # bat
                         self.roomBlocks.append(Bat((x, y)))
-
-
 
     def draw(self, screen):
         if self.display:
