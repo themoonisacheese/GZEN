@@ -9,7 +9,18 @@ from slime import Slime
 from displayableElement import DisplayableElement
 
 class Room(DisplayableElement):
-    def __init__(self, floordesignPath, roomnumber, floorNumber): #FIXME: les couleurs dans design niveaux ne sont pas homogenes.
+    def __init__(self, roomnumber, floorNumber): #FIXME: les couleurs dans design niveaux ne sont pas homogenes.
+        if floorNumber ==1:#python doesn't have switch statements smh
+            floordesignPath = 'design niveaux/lvl1.png'
+        elif floorNumer == 2:
+            floordesignPath = 'design niveaux/lvl2.png'
+        elif floorNumer == 3:
+            floordesignPath = 'design niveaux/lvl3.png'
+        elif floorNumer == 4:
+            floordesignPath = 'design niveaux/lvl4(antigrav).png'
+        elif floorNumer == 5:
+            floordesignPath = 'design niveaux/lvl5.png'
+        
         floordesign = pygame.image.load(floordesignPath)
         self.roomnumber=roomnumber
         self.roomBlocks=[]

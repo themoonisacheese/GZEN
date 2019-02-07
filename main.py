@@ -63,7 +63,7 @@ while 1:
         roomNumber += 1
         if roomNumber >= 8:
             roomNumber = 0
-        gameObjects[-4] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)  # FIXME
+        gameObjects[-4] = Room(roomNumber, floorNumber)  # FIXME
         gameObjects[-4].show(True)
         gameObjects[-3].rect.centerx = 0
 
@@ -71,7 +71,7 @@ while 1:
         roomNumber -= 1
         if roomNumber <= -1:
             roomNumber = 7
-        gameObjects[-4] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)  # FIXME
+        gameObjects[-4] = Room(roomNumber, floorNumber)  # FIXME
         gameObjects[-4].show(True)
         gameObjects[-3].rect.centerx = 1024
 

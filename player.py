@@ -105,8 +105,9 @@ class Player(GravityObject):
         stopHitting(self)
 
     def takeDamage(self, amount):
-        self.score = max(0, self.score - amount)
-        self.invincibleTimeLeft = 2.0
+        if self.invincibleTimeLeft <=0:
+            self.score = max(0, self.score - amount)
+            self.invincibleTimeLeft = 2.0
 
     def setGravity(self, gravity):
         self.gravity = gravity
