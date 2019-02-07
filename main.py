@@ -22,13 +22,16 @@ time = 180
 roomNumber = 1
 floorNumber = 1
 pygame.key.set_repeat(1, 200)
+# Music
+pygame.mixer.music.load("music.wav")
+pygame.mixer.music.set_volume(0.1)
 
 gameObjects = []
 for x in range(16):
     for y in range(9):
         gameObjects.append(BackWall((x,y)))
 
-gameObjects.append(Room('design niveaux/lvl1.png', roomNumber, floorNumber))
+gameObjects.append(Room(roomNumber, floorNumber))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'tutorial')))
 gameObjects.append(Player())
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
@@ -41,6 +44,7 @@ for obj in gameObjects:
     obj.display = True
 gameObjects[-7].show(True)
 
+pygame.mixer.music.play(-1)
 while 1:
     clocktick = clock.tick(60)  # on peut multiplier toutes les vitesses par ca pour les adapater au framerate
     # Timer part
@@ -68,15 +72,15 @@ while 1:
         roomNumber += 1
         if roomNumber >= 8:
             roomNumber = 7
-        gameObjects[-7] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+        gameObjects[-7] = Room(roomNumber, floorNumber)#FIXME
         gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 0
 
     if gameObjects[-5].rect.centerx < 0:
         roomNumber -= 1
         if roomNumber <= -1:
-            roomNumber = 0
-        gameObjects[-7] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+            roomNumber = 7
+        gameObjects[-7] = Room(roomNumber, floorNumber)#FIXME
         gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 1024
 
