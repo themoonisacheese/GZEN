@@ -19,18 +19,19 @@ size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 180
-score = 0
+roomNumber = 1
+floorNumber = 1
 pygame.key.set_repeat(1, 200)
 
-# text elements must be after everything else to ensure drawing order
 gameObjects = []
 for x in range(16):
     for y in range(9):
         gameObjects.append(BackWall((x,y)))
 
-gameObjects.append(Room('design niveaux/lvl1.png', 3, 1))
+gameObjects.append(Room('design niveaux/lvl1.png', roomNumber, floorNumber))
 gameObjects.append(Player())
 gameObjects.append(TextElement('texte', 'Calibri', 40, (189, 18, 18)))
+#THE ORDER OF GAMEOBJECTS IN THE LIST IS REALLY IMPORTANT: IT DICTATES DRAWING ORDER. DO NOT MESS WITH IT
 
 for obj in gameObjects:
     obj.display = True
@@ -54,6 +55,23 @@ while 1:
             sys.exit()
         if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
             processInputs(event, gameObjects[-2])
+
+    #room handling
+    if gameObjects[-2].rect.centerx > 1024:
+        roomNumber += 1
+        if roomNumber >= 8:
+            roomNumber = 0
+        gameObjects[-3] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+        gameObjects[-3].show(True)
+        gameObjects[-2].rect.centerx = 0
+
+    if gameObjects[-2].rect.centerx < 0:
+        roomNumber-=1
+        if roomNumber <=-1:
+            roomNumber = 7
+        gameObjects[-3] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+        gameObjects[-3].show(True)
+        gameObjects[-2].rect.centerx = 1024
 
     for obj in gameObjects:
         obj.update(clocktick, gameObjects)

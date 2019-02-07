@@ -8,6 +8,7 @@ class Player(GravityObject):
     facingLeft = True
     walking =False
     score = 0
+    inInCutScene = False
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
         self.upgrades = Upgrades()
@@ -57,7 +58,7 @@ class Player(GravityObject):
 
     def jump(self):
         if self.isOnTheGround:
-            self.addToVec(0, -300 * self.upgrades.jumpingHeight)
+            self.addToVec(0, -350 * self.upgrades.jumpingHeight)
             self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'jumping'), self.facingLeft), 10)
             stopHitting(self)
 
