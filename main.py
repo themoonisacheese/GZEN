@@ -19,14 +19,9 @@ size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 180
-<<<<<<< Updated upstream
-roomNumber = 7
-floorNumber = 1
-=======
 roomNumber = 0
-floorNumber = 1
-white=False
->>>>>>> Stashed changes
+floorNumber = 4
+
 pygame.key.set_repeat(1, 200)
 # Music
 pygame.mixer.music.load("music.wav")
@@ -40,6 +35,7 @@ for x in range(16):
 gameObjects.append(Room(roomNumber, floorNumber))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'tutorial')))
 gameObjects.append(Player())
+gameObjects[-1].setGravity(-1)
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(TextElement('texte', 'Calibri', 35, (189, 18, 18)))

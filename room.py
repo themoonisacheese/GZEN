@@ -8,6 +8,7 @@ from backwall import BackWall
 from slime import Slime
 from spring import Spring
 from spawnPoint import SpawnPoint
+from antiGravButton import Button
 from displayableElement import DisplayableElement
 
 class Room(DisplayableElement):
@@ -58,6 +59,8 @@ class Room(DisplayableElement):
                     self.roomBlocks.append(Spring((x,y)))
                 elif color ==(215,223,1,255):
                     self.roomBlocks.append(SpawnPoint((x,y)))
+                elif color ==(230,89,1, 255):
+                    self.roomBlocks.append(Button((x,y)))
 
     def draw(self, screen):
         if self.display:

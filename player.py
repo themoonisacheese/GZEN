@@ -19,6 +19,7 @@ class Player(GravityObject):
     gravity = 1.0
     nextLevel = False
     respawn = False
+    timeUntilGravChange = 0.0
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
         self.upgrades = Upgrades()
@@ -26,6 +27,7 @@ class Player(GravityObject):
     def update(self, ticktime, objlist):
         self.timeSinceLastSwing += ticktime/1000.0
         self.invincibleTimeLeft -= ticktime/1000.0
+        self.timeUntilGravChange -= ticktime/1000.0
         GravityObject.update(self, ticktime, objlist, self.gravity)
         for obj in objlist:
             if obj.__class__.__name__ == 'Room':
@@ -38,9 +40,11 @@ class Player(GravityObject):
                         self.nextLevel = False
                         self.respawn = True
                         index = objlist.index(obj)
-                        print(index)
-                        print(objlist[index])
                         objlist[index] = Room(0, obj.floorNumber +1)
+                        if obj.floorNumber+1 == 4:
+                            self.setGravity(-1.0)
+                        else:
+                            self.setGravity(1.0)
                         objlist[index].show(True)
                         break;
                     if self.isColliding(block):
@@ -59,6 +63,11 @@ class Player(GravityObject):
                             self.addToVec(0, -800)
                             self.nextLevel = True
                             block.use()
+                        elif block.__class__.__name__ == 'Button':
+                            if self.timeUntilGravChange <= 0.0:
+                                self.timeUntilGravChange = 2.0
+                                self.setGravity(-self.gravity)
+                                block.use()
                         # test root class of enemies, to accomodate different enemy levels.
                         elif issubclass(block.__class__, Slime) or issubclass(block.__class__, Bat):
                             if self.isSwingingSword:
