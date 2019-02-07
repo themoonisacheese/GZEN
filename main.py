@@ -29,6 +29,7 @@ for x in range(16):
         gameObjects.append(BackWall((x,y)))
 
 gameObjects.append(Room('design niveaux/lvl1.png', roomNumber, floorNumber))
+gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'tutorial')))
 gameObjects.append(Player())
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
@@ -38,7 +39,7 @@ gameObjects.append(TextElement('texte', 'Calibri', 35, (189, 18, 18)))
 
 for obj in gameObjects:
     obj.display = True
-gameObjects[-6].show(True)
+gameObjects[-7].show(True)
 
 while 1:
     clocktick = clock.tick(60)  # on peut multiplier toutes les vitesses par ca pour les adapater au framerate
@@ -66,17 +67,17 @@ while 1:
     if gameObjects[-5].rect.centerx > 1024:
         roomNumber += 1
         if roomNumber >= 8:
-            roomNumber = 0
-        gameObjects[-6] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
-        gameObjects[-6].show(True)
+            roomNumber = 7
+        gameObjects[-7] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+        gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 0
 
     if gameObjects[-5].rect.centerx < 0:
         roomNumber -= 1
         if roomNumber <= -1:
-            roomNumber = 7
-        gameObjects[-6] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
-        gameObjects[-6].show(True)
+            roomNumber = 0
+        gameObjects[-7] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+        gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 1024
 
     for obj in gameObjects:
