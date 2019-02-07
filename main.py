@@ -32,6 +32,7 @@ for x in range(16):
         gameObjects.append(BackWall((x,y)))
 
 gameObjects.append(Room(roomNumber, floorNumber))
+gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'tutorial')))
 gameObjects.append(Player())
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
@@ -41,7 +42,7 @@ gameObjects.append(TextElement('texte', 'Calibri', 35, (189, 18, 18)))
 
 for obj in gameObjects:
     obj.display = True
-gameObjects[-6].show(True)
+gameObjects[-7].show(True)
 
 pygame.mixer.music.play(-1)
 while 1:
@@ -50,6 +51,9 @@ while 1:
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
+    if time<1 and white==False :
+        SM.fadeOut()
+        white=True
     timeleft = str(int(time)) + "s left!"
     gameObjects[-2].setText(timeleft)  # dirty adressing atm
     gameObjects[-2].moveto((98, 28))
@@ -65,22 +69,27 @@ while 1:
             sys.exit()
         if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
             processInputs(event, gameObjects[-5])
-
     #room handling
+    if roomNumber != 0 or floorNumber != 1 :
+        gameObjects[-6].display = False
+    else :
+        gameObjects[-6].display = True
+
     if gameObjects[-5].rect.centerx > 1024:
         roomNumber += 1
         if roomNumber >= 8:
             roomNumber = 0
-        gameObjects[-6] = Room(roomNumber, floorNumber)
-        gameObjects[-6].show(True)
+        gameObjects[-7] = Room(roomNumber, floorNumber)#FIXME
+        gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 0
 
     if gameObjects[-5].rect.centerx < 0:
         roomNumber -= 1
         if roomNumber <= -1:
             roomNumber = 7
-        gameObjects[-6] = Room(roomNumber, floorNumber)
-        gameObjects[-6].show(True)
+
+        gameObjects[-7] = Room(roomNumber, floorNumber)#FIXME
+        gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 1024
 
     for obj in gameObjects:
