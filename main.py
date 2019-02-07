@@ -95,6 +95,6 @@ while 1:
     for obj in gameObjects:
         obj.update(clocktick, gameObjects)
         obj.animate(clocktick)
-    roomNumber = gameObjects[-6].roomnumber
-    floorNumber = gameObjects[-6].floorNumber
+    roomNumber = gameObjects[-7].roomnumber
+    floorNumber = gameObjects[-7].floorNumber
     SM.displayElements(gameObjects)
