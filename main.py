@@ -19,7 +19,7 @@ size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 180
-roomNumber = 1
+roomNumber = 3
 floorNumber = 1
 pygame.key.set_repeat(1, 200)
 

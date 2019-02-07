@@ -29,8 +29,8 @@ class Player(GravityObject):
                             self.score += 100
                             block.destroy()
                             obj.roomBlocks.remove(block)
-                        elif block.__class__.__name__ == 'Meat':
-                            if block.pickupDelay <=0.0:
+                        elif block.__class__.__name__ == 'Chicken':
+                            if block.pickupDelay <= 0.0:
                                 self.score += 200
                                 block.destroy()
                                 obj.roomBlocks.remove(block)
