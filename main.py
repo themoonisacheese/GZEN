@@ -30,8 +30,9 @@ for x in range(16):
 
 gameObjects.append(Room('design niveaux/lvl1.png', roomNumber, floorNumber))
 gameObjects.append(Player())
+gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(TextElement('texte', 'Calibri', 40, (189, 18, 18)))
-#THE ORDER OF GAMEOBJECTS IN THE LIST IS REALLY IMPORTANT: IT DICTATES DRAWING ORDER. DO NOT MESS WITH IT
+# THE ORDER OF GAMEOBJECTS IN THE LIST IS REALLY IMPORTANT: IT DICTATES DRAWING ORDER. DO NOT MESS WITH IT
 
 for obj in gameObjects:
     obj.display = True
