@@ -7,6 +7,7 @@ from animationAggregator import aggregateAnim
 from upgrades import Upgrades
 from chicken import Chicken
 from room import Room
+from npcdialog import NpcDialog
 
 
 class Player(GravityObject):
@@ -14,11 +15,12 @@ class Player(GravityObject):
     facingLeft = True
     walking =False
     score = 0
-    inInCutScene = False
+    isInCutScene = False
     invincibleTimeLeft = 0
     gravity = 1.0
     nextLevel = False
     respawn = False
+    timeUntilGravChange = 0.0
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
         self.upgrades = Upgrades()
@@ -26,6 +28,7 @@ class Player(GravityObject):
     def update(self, ticktime, objlist):
         self.timeSinceLastSwing += ticktime/1000.0
         self.invincibleTimeLeft -= ticktime/1000.0
+        self.timeUntilGravChange -= ticktime/1000.0
         GravityObject.update(self, ticktime, objlist, self.gravity)
         for obj in objlist:
             if obj.__class__.__name__ == 'Room':
@@ -38,9 +41,11 @@ class Player(GravityObject):
                         self.nextLevel = False
                         self.respawn = True
                         index = objlist.index(obj)
-                        print(index)
-                        print(objlist[index])
                         objlist[index] = Room(0, obj.floorNumber +1)
+                        if obj.floorNumber+1 == 4:
+                            self.setGravity(-1.0)
+                        else:
+                            self.setGravity(1.0)
                         objlist[index].show(True)
                         break;
                     if self.isColliding(block):
@@ -59,6 +64,18 @@ class Player(GravityObject):
                             self.addToVec(0, -800)
                             self.nextLevel = True
                             block.use()
+                        elif block.__class__.__name__ == 'Button':
+                            if self.timeUntilGravChange <= 0.0:
+                                self.timeUntilGravChange = 2.0
+                                self.setGravity(-self.gravity)
+                                block.use()
+                        elif block.__class__.__name__ == 'PNJ':
+                            if not block.alreadyTalked:
+                                self.changeVec((0,0))
+                                self.isInCutScene = True
+                                obj.roomBlocks.append(NpcDialog((block.rect.centerx, block.rect.top -10), block.getDialogue(), self.stopCutscene))
+
+
                         # test root class of enemies, to accomodate different enemy levels.
                         elif issubclass(block.__class__, Slime) or issubclass(block.__class__, Bat):
                             if self.isSwingingSword:
@@ -70,6 +87,9 @@ class Player(GravityObject):
                                     obj.roomBlocks.remove(block)
                             else:
                                 self.takeDamage(block.damage)
+
+    def stopCutscene(self):
+        self.isInCutScene = False
 
     def flipList(self, listToFlip, flip, gravity):
         boolgrav = gravity < 0
@@ -92,32 +112,34 @@ class Player(GravityObject):
                 self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'strong_attack'), self.facingLeft, self.gravity), 10, stopHitting)
 
     def jump(self):
-        if self.isOnTheGround:
+        if self.isOnTheGround and not self.isInCutScene:
             self.addToVec(0, -350 * self.upgrades.jumpingHeight * self.gravity)
             self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'jumping'), self.facingLeft, self.gravity), 10)
             stopHitting(self)
 
     def startWalking(self, left):
-        if left:
-            self.addToVec(128 * self.upgrades.walkingSpeed, 0)
-        else:
-            self.addToVec(-128* self.upgrades.walkingSpeed, 0)
-        if left != self.facingLeft:
-            self.walking = True
-            self.facingLeft = left
-            self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'walking'), left, self.gravity), 5)
-            stopHitting(self)
+        if not self.isInCutScene:
+            if left:
+                self.addToVec(128 * self.upgrades.walkingSpeed, 0)
+            else:
+                self.addToVec(-128* self.upgrades.walkingSpeed, 0)
+            if left != self.facingLeft:
+                self.walking = True
+                self.facingLeft = left
+                self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'walking'), left, self.gravity), 5)
+                stopHitting(self)
 
     def startRunning(self, left):
-        if left:
-            self.addToVec(64* self.upgrades.walkingSpeed, 0)
-        else:
-            self.addToVec(-64* self.upgrades.walkingSpeed, 0)
-        if left != self.facingLeft or self.walking:
-            self.walking = False
-            self.facingLeft = left
-            self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'running'), left, self.gravity), 5)
-            stopHitting(self)
+        if not self.isInCutScene:
+            if left:
+                self.addToVec(64* self.upgrades.walkingSpeed, 0)
+            else:
+                self.addToVec(-64* self.upgrades.walkingSpeed, 0)
+            if left != self.facingLeft or self.walking:
+                self.walking = False
+                self.facingLeft = left
+                self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'running'), left, self.gravity), 5)
+                stopHitting(self)
 
     def stopMoving(self):
         self.walking = False
