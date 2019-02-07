@@ -5,11 +5,11 @@ import sys
 upkeys = [pygame.K_UP, pygame.K_z, pygame.K_w, pygame.K_SPACE]
 leftkeys = [pygame.K_RIGHT, pygame.K_d]
 rightkeys = [pygame.K_LEFT, pygame.K_q, pygame.K_a]
+lastevent = True
 
 
 def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
-    # x = 0
-    # TODO: PUT SOME KEYUP TO STOP OK MY FRIEND
+    global lastevent
     if event.type == pygame.KEYDOWN:
         if event.key in upkeys:
             # print(char.movementVector)
@@ -19,8 +19,8 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
             # char.movementVector = char.movementVector[0], char.movementVector[1] - 628 * (clocktick/1000)
             # print(char.movementVector)
         elif event.key in rightkeys:
-            # print(char.movementVector)
-            # print("right")
+            char.startRunning(True)
+            lastevent = True
             if char.movementVector[0] >= 0:
                 #char.movementVector = char.movementVector[0] - 64, char.movementVector[1]
                 char.startWalking(False)
@@ -32,8 +32,8 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
             # print(char.movementVector)
             # print('Val ajoutee : ' + str(x))
         elif event.key in leftkeys:
-            # print(char.movementVector)
-            # print("left")
+            char.startRunning(False)
+            lastevent = False
             if char.movementVector[0] <= 0:
                 char.startWalking(True)
                 # x = 64

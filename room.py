@@ -3,6 +3,7 @@ from wall import Wall
 from spike import Spike
 from coin import Coin
 from bat import Bat
+from slime import Slime
 from backwall import BackWall
 from slime import Slime
 from displayableElement import DisplayableElement
@@ -16,29 +17,29 @@ class Room(DisplayableElement):
             for x in range(16):
                 color = floordesign.get_at((x + (roomnumber*16), y))
 #                print("x = " + str(x+ (roomnumber*16)) + "; y = " + str(y) + "; color = " + str(color))
-                if color == (0,0,0,255):#wall
-                    self.roomBlocks.append(Wall((x,y)))
-                elif color == (88,88,88,255):#spike
-                    if floordesign.get_at((x + (roomnumber*16), y+1)) == (0,0,0,255):
-                        self.roomBlocks.append(Spike((x,y)))
-                    elif floordesign.get_at((x + (roomnumber*16) +1, y)) == (0,0,0,255):
-                        self.roomBlocks.append(Spike((x,y), 1))
-                    elif floordesign.get_at((x + (roomnumber*16) -1, y)) == (0,0,0,255):
-                        self.roomBlocks.append(Spike((x,y), 3))
-                    elif floordesign.get_at((x + (roomnumber*16) , y-1)) == (0,0,0,255):
-                        self.roomBlocks.append(Spike((x,y), 2))
+                if color == (0,0,0,255):  # wall
+                    self.roomBlocks.append(Wall((x, y)))
+                elif color == (88,88,88,255):  # spike
+                    if floordesign.get_at((x + (roomnumber*16), y+1)) == (0, 0, 0, 255):
+                        self.roomBlocks.append(Spike((x, y)))
+                    elif floordesign.get_at((x + (roomnumber*16) +1, y)) == (0, 0, 0, 255):
+                        self.roomBlocks.append(Spike((x, y), 1))
+                    elif floordesign.get_at((x + (roomnumber*16) -1, y)) == (0, 0, 0, 255):
+                        self.roomBlocks.append(Spike((x, y), 3))
+                    elif floordesign.get_at((x + (roomnumber*16) , y-1)) == (0, 0, 0, 255):
+                        self.roomBlocks.append(Spike((x, y), 2))
                     else:
-                        self.roomBlocks.append(Spike((x,y)))
+                        self.roomBlocks.append(Spike((x, y)))
                 elif color == (18, 189, 99, 255):
-                    self.roomBlocks.append(Coin((x,y)))
+                    self.roomBlocks.append(Coin((x, y)))
                 elif color == (189, 18, 18, 255):
                     #enemy
                     if floordesign.get_at((x + (roomnumber*16), y+1)) == (0,0,0,255):
                         self.roomBlocks.append(Slime((x,y)))
                         pass
                     else:
-                        #bat
-                        self.roomBlocks.append(Bat((x,y)))
+                        # bat
+                        self.roomBlocks.append(Bat((x, y)))
 
 
 
