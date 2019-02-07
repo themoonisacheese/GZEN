@@ -22,6 +22,9 @@ time = 180
 roomNumber = 1
 floorNumber = 1
 pygame.key.set_repeat(1, 200)
+# Music
+pygame.mixer.music.load("music.wav")
+pygame.mixer.music.set_volume(0.1)
 
 gameObjects = []
 for x in range(16):
@@ -40,6 +43,7 @@ for obj in gameObjects:
     obj.display = True
 gameObjects[-6].show(True)
 
+pygame.mixer.music.play(-1)
 while 1:
     clocktick = clock.tick(60)  # on peut multiplier toutes les vitesses par ca pour les adapater au framerate
     # Timer part
