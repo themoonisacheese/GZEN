@@ -1,18 +1,21 @@
 import pygame
 
 from bat import Bat
+from slime import Slime
 from gravityObject import GravityObject
 from animationAggregator import aggregateAnim
-from slime import Slime
+from upgrades import Upgrades
 
 
 class Player(GravityObject):
     timeSinceLastSwing = 0
     facingLeft = True
+    walking =False
     score = 0
-
+    inInCutScene = False
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
+        self.upgrades = Upgrades()
 
     def update(self, ticktime, objlist):
         self.timeSinceLastSwing += ticktime/1000.0
@@ -22,9 +25,6 @@ class Player(GravityObject):
                 for block in obj.roomBlocks:
                     if self.isColliding(block):
                         if block.__class__.__name__ == 'Coin':
-                            self.score = self.score + 100
-                            obj.roomBlocks.remove(block)
-                            print(str(self.score))
                             # add score, delete the coin
                             pass
                         elif block.__class__.__name__ == 'Meat':
@@ -38,26 +38,23 @@ class Player(GravityObject):
                             if self.isSwingingSword:
                                 # damage the enemy
                                 block.takeDamage(1)
-                                print(str(block.hp))
                                 if block.hp <= 0:
+                                    block.destroy()
                                     obj.roomBlocks.remove(block)
-                                pass
                             else:
-                                # remove score, knockback?
-                                pass
+                                self.score = max(0, self.score - block.damage)
 
     def flipList(self, listToFlip, flip):
         templist = []
         for frame in listToFlip:
-            templist.append(pygame.transform.flip(frame, flip, False))
+            templist.append(pygame.transform.flip(frame, not flip, False))
         return templist
 
-    def lighHit(self, left):
-        self.facingLeft = left
+    def lighHit(self):
         if self.timeSinceLastSwing >= 0.5:
             self.timeSinceLastSwing = 0
             self.isSwingingSword = True
-            self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'light_attack'), left), 10, stopHitting)
+            self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'light_attack'), self.facingLeft), 10, stopHitting)
 
     def heavyHit(self):
         if self.upgrades.heavyHit:
@@ -68,23 +65,35 @@ class Player(GravityObject):
 
     def jump(self):
         if self.isOnTheGround:
-            self.addToVec(0, -300)  # * self.upgrades.jumpingHeight
+            self.addToVec(0, -350 * self.upgrades.jumpingHeight)
             self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'jumping'), self.facingLeft), 10)
             stopHitting(self)
 
     def startWalking(self, left):
-        self.facingLeft = left
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'walking'), left), 5)
-        stopHitting(self)
+        if left:
+            self.addToVec(128 * self.upgrades.walkingSpeed, 0)
+        else:
+            self.addToVec(-128* self.upgrades.walkingSpeed, 0)
+        if left != self.facingLeft:
+            self.walking = True
+            self.facingLeft = left
+            self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'walking'), left), 5)
+            stopHitting(self)
 
     def startRunning(self, left):
-        self.facingLeft = left
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'running'), left), 5)
-        stopHitting(self)
+        if left:
+            self.addToVec(64* self.upgrades.walkingSpeed, 0)
+        else:
+            self.addToVec(-64* self.upgrades.walkingSpeed, 0)
+        if left != self.facingLeft or self.walking:
+            self.walking = False
+            self.facingLeft = left
+            self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'running'), left), 5)
+            stopHitting(self)
 
-    def stopMoving(self, left):
-        self.facingLeft = left
-        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'idle'), left), 5)
+    def stopMoving(self):
+        self.walking = False
+        self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'idle'), self.facingLeft), 5)
         stopHitting(self)
 
 
