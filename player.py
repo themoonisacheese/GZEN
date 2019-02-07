@@ -2,9 +2,11 @@ import pygame
 from gravityObject import GravityObject
 from animationAggregator import aggregateAnim
 
+
 class Player(GravityObject):
     timeSinceLastSwing = 0
     facingLeft = True
+
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
 
