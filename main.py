@@ -31,7 +31,7 @@ for x in range(16):
     for y in range(9):
         gameObjects.append(BackWall((x,y)))
 
-gameObjects.append(Room('design niveaux/lvl1.png', roomNumber, floorNumber))
+gameObjects.append(Room(roomNumber, floorNumber))
 gameObjects.append(Player())
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
@@ -71,7 +71,7 @@ while 1:
         roomNumber += 1
         if roomNumber >= 8:
             roomNumber = 0
-        gameObjects[-6] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+        gameObjects[-6] = Room(roomNumber, floorNumber)  # FIXME
         gameObjects[-6].show(True)
         gameObjects[-5].rect.centerx = 0
 
@@ -79,7 +79,7 @@ while 1:
         roomNumber -= 1
         if roomNumber <= -1:
             roomNumber = 7
-        gameObjects[-6] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+        gameObjects[-6] = Room(roomNumber, floorNumber)  # FIXME
         gameObjects[-6].show(True)
         gameObjects[-5].rect.centerx = 1024
 
