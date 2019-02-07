@@ -9,6 +9,7 @@ from slime import Slime
 from spring import Spring
 from spawnPoint import SpawnPoint
 from antiGravButton import Button
+from pnj import PNJ
 from displayableElement import DisplayableElement
 
 class Room(DisplayableElement):
@@ -61,6 +62,8 @@ class Room(DisplayableElement):
                     self.roomBlocks.append(SpawnPoint((x,y)))
                 elif color ==(230,89,1, 255):
                     self.roomBlocks.append(Button((x,y)))
+                elif color == (168, 7, 125, 255):
+                    self.roomBlocks.append(PNJ((x,y)))
 
     def draw(self, screen):
         if self.display:

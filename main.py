@@ -20,7 +20,7 @@ SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 180
 roomNumber = 0
-floorNumber = 4
+floorNumber = 3
 
 pygame.key.set_repeat(1, 200)
 # Music
@@ -35,7 +35,6 @@ for x in range(16):
 gameObjects.append(Room(roomNumber, floorNumber))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'tutorial')))
 gameObjects.append(Player())
-gameObjects[-1].setGravity(-1)
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(TextElement('texte', 'Calibri', 35, (189, 18, 18)))
