@@ -15,3 +15,4 @@ class GameObject(DisplayableElement):
         self.animationFrames = []
         self.animationFrameRate = 0
         self.currentTexture = None
+        self.rect.center = (-100, -100)

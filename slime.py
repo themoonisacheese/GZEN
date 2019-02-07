@@ -49,3 +49,6 @@ class Slime(GravityObject, GridAlignedObject):
     def addToVec(self, x, y):
         GravityObject.addToVec(self, x, y)
         self.animationFrames = self.flipList(aggregateAnim('sprites/mobs/', 'slime_f'), (self.facingLeft))
+
+    def takeDamage(self, amount):
+        self.hp -=  amount
