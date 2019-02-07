@@ -20,7 +20,7 @@ SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 180
 roomNumber = 1
-floorNumber = 3
+floorNumber = 5
 white=False
 pygame.key.set_repeat(1, 200)
 # Music
