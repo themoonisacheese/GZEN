@@ -19,8 +19,14 @@ size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 180
+<<<<<<< Updated upstream
 roomNumber = 7
 floorNumber = 1
+=======
+roomNumber = 0
+floorNumber = 1
+white=False
+>>>>>>> Stashed changes
 pygame.key.set_repeat(1, 200)
 # Music
 pygame.mixer.music.load("music.wav")
