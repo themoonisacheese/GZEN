@@ -19,7 +19,7 @@ size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 180
-roomNumber = 1
+roomNumber = 7
 floorNumber = 1
 pygame.key.set_repeat(1, 200)
 # Music
@@ -71,7 +71,7 @@ while 1:
         roomNumber += 1
         if roomNumber >= 8:
             roomNumber = 0
-        gameObjects[-6] = Room(roomNumber, floorNumber)  # FIXME
+        gameObjects[-6] = Room(roomNumber, floorNumber)
         gameObjects[-6].show(True)
         gameObjects[-5].rect.centerx = 0
 
@@ -79,11 +79,13 @@ while 1:
         roomNumber -= 1
         if roomNumber <= -1:
             roomNumber = 7
-        gameObjects[-6] = Room(roomNumber, floorNumber)  # FIXME
+        gameObjects[-6] = Room(roomNumber, floorNumber)
         gameObjects[-6].show(True)
         gameObjects[-5].rect.centerx = 1024
 
     for obj in gameObjects:
         obj.update(clocktick, gameObjects)
         obj.animate(clocktick)
+    roomNumber = gameObjects[-6].roomnumber
+    floorNumber = gameObjects[-6].floorNumber
     SM.displayElements(gameObjects)

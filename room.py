@@ -6,19 +6,22 @@ from bat import Bat
 from slime import Slime
 from backwall import BackWall
 from slime import Slime
+from spring import Spring
+from spawnPoint import SpawnPoint
 from displayableElement import DisplayableElement
 
 class Room(DisplayableElement):
     def __init__(self, roomnumber, floorNumber): #FIXME: les couleurs dans design niveaux ne sont pas homogenes.
+        self.floorNumber = floorNumber
         if floorNumber ==1:#python doesn't have switch statements smh
             floordesignPath = 'design niveaux/lvl1.png'
-        elif floorNumer == 2:
+        elif floorNumber == 2:
             floordesignPath = 'design niveaux/lvl2.png'
-        elif floorNumer == 3:
+        elif floorNumber == 3:
             floordesignPath = 'design niveaux/lvl3.png'
-        elif floorNumer == 4:
+        elif floorNumber == 4:
             floordesignPath = 'design niveaux/lvl4(antigrav).png'
-        elif floorNumer == 5:
+        elif floorNumber == 5:
             floordesignPath = 'design niveaux/lvl5.png'
 
         floordesign = pygame.image.load(floordesignPath)
@@ -50,6 +53,11 @@ class Room(DisplayableElement):
                     else:
                         # bat
                         self.roomBlocks.append(Bat((x, y)))
+                elif color == (23, 18, 198, 255):
+                    #spring
+                    self.roomBlocks.append(Spring((x,y)))
+                elif color ==(215,223,1,255):
+                    self.roomBlocks.append(SpawnPoint((x,y)))
 
     def draw(self, screen):
         if self.display:
