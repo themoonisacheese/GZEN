@@ -5,7 +5,7 @@ from animationAggregator import aggregateAnim
 
 
 class Slime(GravityObject, GridAlignedObject):
-    hp = 1
+    hp = 10
     damage = 100
     facingLeft = False
     __timeSinceJump = 0.0
