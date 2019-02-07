@@ -66,8 +66,12 @@ while 1:
             sys.exit()
         if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
             processInputs(event, gameObjects[-5])
-
     #room handling
+    if roomNumber != 0 or floorNumber != 1 :
+        gameObjects[-6].display = False
+    else :
+        gameObjects[-6].display = True
+
     if gameObjects[-5].rect.centerx > 1024:
         roomNumber += 1
         if roomNumber >= 8:
