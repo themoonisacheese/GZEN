@@ -27,7 +27,7 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
                 char.movementVector = char.movementVector[0] - 32, char.movementVector[1]
                 # x = 32
             # print(char.movementVector)
-            # print('Val ajoutée : ' + str(x))
+            # print('Val ajoutee : ' + str(x))
         elif event.key in leftkeys:
             # print(char.movementVector)
             # print("left")
@@ -38,7 +38,7 @@ def processInputs(event, char):  # event.type is guaranteed to be pygame.KEYDOWN
                 char.movementVector = char.movementVector[0] + 32, char.movementVector[1]
                 # x = 32
             # print(char.movementVector)
-            # print('Val ajoutée : ' + str(x))
+            # print('Val ajoutee : ' + str(x))
         elif event.key == pygame.K_f:
             print("atak")  # attack
         elif event.key == pygame.K_ESCAPE:
