@@ -56,7 +56,6 @@ class Player(GravityObject):
                 self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'strong_attack'), self.facingLeft), 10, stopHitting)
 
     def jump(self):
-        print(self.isOnTheGround)
         if self.isOnTheGround:
             self.addToVec(0, -300 * self.upgrades.jumpingHeight)
             self.changeAnimationTemp(self.flipList(aggregateAnim('sprites/character/', 'jumping'), self.facingLeft), 10)

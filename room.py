@@ -4,6 +4,7 @@ from spike import Spike
 from coin import Coin
 from bat import Bat
 from backwall import BackWall
+from slime import Slime
 from displayableElement import DisplayableElement
 
 class Room(DisplayableElement):
@@ -33,7 +34,7 @@ class Room(DisplayableElement):
                 elif color == (189, 18, 18, 255):
                     #enemy
                     if floordesign.get_at((x + (roomnumber*16), y+1)) == (0,0,0,255):
-                        #slime
+                        self.roomBlocks.append(Slime((x,y)))
                         pass
                     else:
                         #bat
