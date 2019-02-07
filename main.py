@@ -44,7 +44,7 @@ while 1:
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
-    timeleft = str(int(time)) + "s left!"
+    timeleft = str(int(time)) + "s left"
     gameObjects[-1].setText(timeleft)  # dirty adressing atm
     gameObjects[-1].moveto((98, 28))
     # End timer part
@@ -57,12 +57,12 @@ while 1:
         if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
             processInputs(event, gameObjects[-3])
 
-    #room handling
+    # room handling
     if gameObjects[-3].rect.centerx > 1024:
         roomNumber += 1
         if roomNumber >= 8:
             roomNumber = 0
-        gameObjects[-4] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+        gameObjects[-4] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)  # FIXME
         gameObjects[-4].show(True)
         gameObjects[-3].rect.centerx = 0
 
@@ -70,7 +70,7 @@ while 1:
         roomNumber -= 1
         if roomNumber <= -1:
             roomNumber = 7
-        gameObjects[-4] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)#FIXME
+        gameObjects[-4] = Room('design niveaux/lvl1.png', roomNumber, floorNumber)  # FIXME
         gameObjects[-4].show(True)
         gameObjects[-3].rect.centerx = 1024
 

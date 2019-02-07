@@ -28,12 +28,12 @@ class Player(GravityObject):
                 for block in obj.roomBlocks:
                     if self.isColliding(block):
                         if block.__class__.__name__ == 'Coin':
-                            self.score += 100
+                            self.score = self.score + 100
                             block.destroy()
                             obj.roomBlocks.remove(block)
                         elif block.__class__.__name__ == 'Chicken':
                             if block.pickupDelay <= 0.0:
-                                self.score += 200
+                                self.score = self.score + 200
                                 block.destroy()
                                 obj.roomBlocks.remove(block)
                         elif block.__class__.__name__ == 'Spike':
