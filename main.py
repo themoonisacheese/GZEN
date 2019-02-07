@@ -19,9 +19,8 @@ size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 180
-roomNumber = 1
-floorNumber = 5
-white=False
+roomNumber = 7
+floorNumber = 1
 pygame.key.set_repeat(1, 200)
 # Music
 pygame.mixer.music.load("music.wav")
@@ -96,4 +95,6 @@ while 1:
     for obj in gameObjects:
         obj.update(clocktick, gameObjects)
         obj.animate(clocktick)
+    roomNumber = gameObjects[-6].roomnumber
+    floorNumber = gameObjects[-6].floorNumber
     SM.displayElements(gameObjects)

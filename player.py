@@ -6,6 +6,7 @@ from gravityObject import GravityObject
 from animationAggregator import aggregateAnim
 from upgrades import Upgrades
 from chicken import Chicken
+from room import Room
 
 
 class Player(GravityObject):
@@ -16,6 +17,8 @@ class Player(GravityObject):
     inInCutScene = False
     invincibleTimeLeft = 0
     gravity = 1.0
+    nextLevel = False
+    respawn = False
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
         self.upgrades = Upgrades()
@@ -27,6 +30,19 @@ class Player(GravityObject):
         for obj in objlist:
             if obj.__class__.__name__ == 'Room':
                 for block in obj.roomBlocks:
+                    if self.respawn and block.__class__.__name__ == 'SpawnPoint':
+                        self.respawn = False
+                        self.changeVec((0,0))
+                        self.moveto(block.rect.center)
+                    elif block.__class__.__name__ == 'Wall' and self.nextLevel and block.rect.collidepoint(self.rect.centerx, self.rect.top - 4):
+                        self.nextLevel = False
+                        self.respawn = True
+                        index = objlist.index(obj)
+                        print(index)
+                        print(objlist[index])
+                        objlist[index] = Room(0, obj.floorNumber +1)
+                        objlist[index].show(True)
+                        break;
                     if self.isColliding(block):
                         if block.__class__.__name__ == 'Coin':
                             self.score = self.score + 100
@@ -38,7 +54,11 @@ class Player(GravityObject):
                                 block.destroy()
                                 obj.roomBlocks.remove(block)
                         elif block.__class__.__name__ == 'Spike':
-                                self.takeDamage(500)
+                                self.takeDamage(200)
+                        elif block.__class__.__name__ == 'Spring':
+                            self.addToVec(0, -800)
+                            self.nextLevel = True
+                            block.use()
                         # test root class of enemies, to accomodate different enemy levels.
                         elif issubclass(block.__class__, Slime) or issubclass(block.__class__, Bat):
                             if self.isSwingingSword:
