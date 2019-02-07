@@ -21,7 +21,9 @@ clock = pygame.time.Clock()
 time = 180
 roomNumber = 0
 floorNumber = 3
-
+#roomNumber = 0
+#floorNumber = 1
+white=False
 pygame.key.set_repeat(1, 200)
 # Music
 pygame.mixer.music.load("music.wav")
