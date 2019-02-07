@@ -38,13 +38,11 @@ class Player(GravityObject):
                             if self.isSwingingSword:
                                 # damage the enemy
                                 block.takeDamage(1)
-                                print(str(block.hp))
                                 if block.hp <= 0:
-                                    block.display = False
-                                pass
+                                    block.destroy()
+                                    obj.roomBlocks.remove(block)
                             else:
-                                # remove score, knockback?
-                                pass
+                                self.score = max(0, self.score - block.damage)
 
     def flipList(self, listToFlip, flip):
         templist = []
