@@ -9,6 +9,7 @@ from slime import Slime
 from spring import Spring
 from spawnPoint import SpawnPoint
 from displayableElement import DisplayableElement
+from table import Table
 
 class Room(DisplayableElement):
     def __init__(self, roomnumber, floorNumber): #FIXME: les couleurs dans design niveaux ne sont pas homogenes.
@@ -58,6 +59,8 @@ class Room(DisplayableElement):
                     self.roomBlocks.append(Spring((x,y)))
                 elif color ==(215,223,1,255):
                     self.roomBlocks.append(SpawnPoint((x,y)))
+                elif color ==(9,199,254):
+                    self.roomBlocks.append(Table((x,y)))
 
     def draw(self, screen):
         if self.display:
