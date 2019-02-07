@@ -14,12 +14,14 @@ class Player(GravityObject):
     walking =False
     score = 0
     inInCutScene = False
+    invincibleTimeLeft = 0
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
         self.upgrades = Upgrades()
 
     def update(self, ticktime, objlist):
         self.timeSinceLastSwing += ticktime/1000.0
+        self.invincibleTimeLeft -= ticktime/1000.0
         GravityObject.update(self, ticktime, objlist)
         for obj in objlist:
             if obj.__class__.__name__ == 'Room':
@@ -35,8 +37,7 @@ class Player(GravityObject):
                                 block.destroy()
                                 obj.roomBlocks.remove(block)
                         elif block.__class__.__name__ == 'Spike':
-                            # remove Score
-                            pass
+                                self.takeDamage(500)
                         # test root class of enemies, to accomodate different enemy levels.
                         elif issubclass(block.__class__, Slime) or issubclass(block.__class__, Bat):
                             if self.isSwingingSword:
@@ -46,10 +47,8 @@ class Player(GravityObject):
                                     obj.roomBlocks.append(Chicken(block.rect.center))
                                     block.destroy()
                                     obj.roomBlocks.remove(block)
-
-
                             else:
-                                self.score = max(0, self.score - block.damage)
+                                self.takeDamage(block.damage)
 
     def flipList(self, listToFlip, flip):
         templist = []
@@ -102,6 +101,10 @@ class Player(GravityObject):
         self.walking = False
         self.changeAnimation(self.flipList(aggregateAnim('sprites/character/', 'idle'), self.facingLeft), 5)
         stopHitting(self)
+
+    def takeDamage(self, amount):
+        self.score = max(0, self.score - amount)
+        self.invincibleTimeLeft = 2.0
 
 
 def stopHitting(obj):
