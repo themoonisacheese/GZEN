@@ -21,6 +21,7 @@ clock = pygame.time.Clock()
 time = 180
 roomNumber = 1
 floorNumber = 1
+white=False
 pygame.key.set_repeat(1, 200)
 # Music
 pygame.mixer.music.load("music.wav")
@@ -51,6 +52,9 @@ while 1:
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
+    if time<1 and white==False :
+        SM.fadeOut()
+        white=True
     timeleft = str(int(time)) + "s left!"
     gameObjects[-2].setText(timeleft)  # dirty adressing atm
     gameObjects[-2].moveto((98, 28))
@@ -75,7 +79,7 @@ while 1:
     if gameObjects[-5].rect.centerx > 1024:
         roomNumber += 1
         if roomNumber >= 8:
-            roomNumber = 7
+            roomNumber = 0
         gameObjects[-7] = Room(roomNumber, floorNumber)#FIXME
         gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 0
@@ -84,6 +88,7 @@ while 1:
         roomNumber -= 1
         if roomNumber <= -1:
             roomNumber = 7
+
         gameObjects[-7] = Room(roomNumber, floorNumber)#FIXME
         gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 1024
