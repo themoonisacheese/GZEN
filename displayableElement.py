@@ -6,7 +6,7 @@ class DisplayableElement:
     display = True
     isInTempAnim = False
     __timeSinceLastAnimation = 0
-    __currentAnimationFrameIndex = 0
+    currentAnimationFrameIndex = 0
 
     def __init__(self, animationFrames, animationFrameRate = 3):
         self.animationFrames = animationFrames
@@ -29,21 +29,21 @@ class DisplayableElement:
             self.__timeSinceLastAnimation += clocktick
             if self.__timeSinceLastAnimation > (1.0/self.animationFrameRate * 1000):
                 self.__timeSinceLastAnimation = 0
-                self.__currentAnimationFrameIndex += 1
-                if self.__currentAnimationFrameIndex >= len(self.animationFrames):
+                self.currentAnimationFrameIndex += 1
+                if self.currentAnimationFrameIndex >= len(self.animationFrames):
                     if self.isInTempAnim:
                         self.changeAnimation(self.__originalAnimation, self.__originalFR)
                         self.__tempAnimCallBack(self)
-                    self.__currentAnimationFrameIndex = 0
-                if self.currentTexture is not self.animationFrames[self.__currentAnimationFrameIndex]:
-                    self.currentTexture = self.animationFrames[self.__currentAnimationFrameIndex]
+                    self.currentAnimationFrameIndex = 0
+                if self.currentTexture is not self.animationFrames[self.currentAnimationFrameIndex]:
+                    self.currentTexture = self.animationFrames[self.currentAnimationFrameIndex]
 
     def changeAnimation(self, newAnimation, animationFrameRate=3):
         OGPOS = self.rect.center
         self.isInTempAnim = False
         self.animationFrameRate = animationFrameRate
         self.animationFrames = newAnimation
-        self.__currentAnimationFrameIndex = 0
+        self.currentAnimationFrameIndex = 0
         self.currentTexture = self.animationFrames[0]
         self.rect = self.currentTexture.get_rect()
         self.rect.center = OGPOS
