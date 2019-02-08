@@ -21,9 +21,19 @@ class Player(GravityObject):
     nextLevel = False
     respawn = False
     timeUntilGravChange = 0.0
+    isSwingingSword = False
+    __BossRoom = None
+    __bossobj = None
     def __init__(self):
         GravityObject.__init__(self, (512, 128), aggregateAnim('sprites/character/', 'idle'), 5)
         self.upgrades = Upgrades()
+
+    def nextBossDialog(self):
+        str = self.__bossobj.nextDialogue()
+        if str != '':
+            self.__BossRoom.roomBlocks.append(NpcDialog((self.__bossobj.rect.centerx, self.__bossobj.rect.top -10), self.__bossobj.nextDialogue(), self.nextBossDialog))
+        else:
+            self.stopCutscene()
 
     def update(self, ticktime, objlist):
         self.timeSinceLastSwing += ticktime/1000.0
@@ -52,7 +62,10 @@ class Player(GravityObject):
                         if not block.alreadyTalked:
                             self.changeVec((0,0))
                             self.isInCutScene = True
-                            obj.roomBlocks.append(NpcDialog((block.rect.centerx, block.rect.top -200), block.getDialogue(), self.stopCutscene))
+                            block.alreadyTalked = True
+                            self.__BossRoom = obj
+                            self.__bossobj = block
+                            obj.roomBlocks.append(NpcDialog((block.rect.centerx, block.rect.top -200), block.nextDialogue(), self.nextBossDialog))
                     if self.isColliding(block):
                         if block.__class__.__name__ == 'Coin':
                             self.score = self.score + 100

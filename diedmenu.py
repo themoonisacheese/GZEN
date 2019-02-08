@@ -6,6 +6,7 @@ from animationAggregator import aggregateAnim
 from textElement import TextElement
 from scoreBoard import ScoreBoard
 from upgrades import Upgrades
+import sys
 
 class DiedMenu:
     def __init__(self, SM, player):
@@ -46,6 +47,8 @@ class DiedMenu:
         self.gameObjects[-1].moveto((530, 140))
         self.gameObjects.append(Button((300, 440), 'sprites/menu/', 'retry', self.retryMenu))
         self.gameObjects.append(Button((700, 440), 'sprites/menu/', 'submit', self.submitMenu))
+        self.gameObjects.append(Button((512, 300), 'sprites/menu/', 'credits', self.credits))
+
 
 
     def retryMenu(self):
@@ -107,7 +110,7 @@ class DiedMenu:
         self.addbackground()
         self.gameObjects.append(TextElement('High Scores:', 'Calibri', 40))
         self.gameObjects[-1].moveto((512, 25))
-        self.gameObjects.append(Button((512, 65), 'sprites/menu/', 'retry', self.retryForReal))
+        self.gameObjects.append(Button((512, 75), 'sprites/menu/', 'retry', self.retryForReal))
         self.scoreBoard.ajouterScore(self.player.score)
         self.player.score = 0
         self.player.upgrades = Upgrades()
@@ -116,3 +119,33 @@ class DiedMenu:
             i += 1
             self.gameObjects.append(TextElement(score[0] + '       ' + str(score[1]), 'Calibri', 20))
             self.gameObjects[-1].moveto((512, 100 + (i*20)))
+
+    def credits(self):
+        self.addbackground()
+        self.gameObjects.append(TextElement('A Game by : GZEN', 'Calibri', 40))
+        self.gameObjects[-1].moveto((512, 20))
+        self.gameObjects.append(TextElement('Lead Programming : Olivier Senn', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 40))
+        self.gameObjects.append(TextElement('Programming : Yannis Lachkar, Roxane Deflandre, Tom Arnaud', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 60))
+        self.gameObjects.append(TextElement('Game Design : Olivier Senn, Yannis Lachkar, Roxane Deflandre, Tom Arnaud', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 80))
+        self.gameObjects.append(TextElement('Level Design : Tom Arnaud', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 100))
+        self.gameObjects.append(TextElement('Lead Graphism / Animations: Roxane Deflandre', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 120))
+        self.gameObjects.append(TextElement('Additional Graphism / Animations : Tom Arnaud', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 140))
+        self.gameObjects.append(TextElement('Cover : Yannis Lachkar, Roxane Deflandre', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 160))
+        self.gameObjects.append(TextElement('Music : Tom Arnaud', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 180))
+        self.gameObjects.append(TextElement('Lead Bodge Engineer : Olivier Senn (all of it)', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 200))
+        self.gameObjects.append(TextElement('Lead Pizza Eater : Yannis Lachkar (enough (for 3 people))', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 220))
+        self.gameObjects.append(TextElement('Lead PyxelEdit Master : Roxane Deflandre (5687 Pixels)', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 240))
+        self.gameObjects.append(TextElement('Lead Coffee Drinker : Tom Arnaud (15L)', 'Calibri', 20))
+        self.gameObjects[-1].moveto((512, 260))
+        self.gameObjects.append(Button((540, 440), 'sprites/menu/', 'retry', self.firstMenu))
