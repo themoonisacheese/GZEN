@@ -1,6 +1,7 @@
 import pygame
 from bat import Bat
 from gridAlignedObject import GridAlignedObject
+from animationAggregator import aggregateAnim
 class Bat4(Bat) :
     hp = 40
     damage = 300
