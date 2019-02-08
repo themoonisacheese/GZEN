@@ -35,6 +35,8 @@ class Room(DisplayableElement):
             floordesignPath = 'design niveaux/lvl4(antigrav).png'
         elif floorNumber == 5:
             floordesignPath = 'design niveaux/lvl5.png'
+        elif floorNumber == 6:
+            floordesignPath = 'design niveaux/salle du boss.png'
 
         floordesign = pygame.image.load(floordesignPath)
         self.roomnumber=roomnumber
