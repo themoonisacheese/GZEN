@@ -20,6 +20,7 @@ from antiGravButton import Button
 from pnj import PNJ
 from displayableElement import DisplayableElement
 from table import Table
+from boss import Boss
 
 class Room(DisplayableElement):
     def __init__(self, roomnumber, floorNumber): #FIXME: les couleurs dans design niveaux ne sont pas homogenes.
@@ -82,7 +83,7 @@ class Room(DisplayableElement):
                             self.roomBlocks.append(Bat4((x,y)))
                         elif floorNumber == 5:
                             self.roomBlocks.append(Bat5((x,y)))
-                elif color == (23, 18, 198, 255):
+                elif color == (23, 18, 189, 255):
                     #spring
                     self.roomBlocks.append(Spring((x,y)))
                 elif color ==(215,223,1,255):
@@ -93,6 +94,8 @@ class Room(DisplayableElement):
                     self.roomBlocks.append(PNJ((x,y)))
                 elif color ==(9,199,254):
                     self.roomBlocks.append(Table((x,y)))
+                elif color ==(124,48,201):
+                    self.roomBlocks.append(Boss((x,y)))
 
     def draw(self, screen):
         if self.display:

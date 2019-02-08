@@ -5,7 +5,7 @@ from animationAggregator import aggregateAnim
 class Boss(GridAlignedObject):
     alreadyTalked = False
     def __init__(self, gridPosition):
-    GridAlignedObject.__init__(self,gridPosition, aggregateAnim('sprites/npc', 'boss_idle_f'), 4)
+        GridAlignedObject.__init__(self,gridPosition, aggregateAnim('sprites/npc', 'boss_idle_f'), 4)
 
     def getDialogue(self):
         self.alreadyTalked = True
