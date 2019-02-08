@@ -7,6 +7,7 @@ class Upgrades:
     resistance = 1.0
     earPods = False
     scoreMultiplier = 1.0
+    attackMultiplier = 1.0
     def __init__(self, cheat = False):
         if cheat:
             heavyHit = True
@@ -15,11 +16,19 @@ class Upgrades:
             resistance = 0.25
             earPods = True
             scoreMultiplier = 10.0
+            attackMultiplier = 5.0
+
+
 
     def buyHeavyHit(self, playerObject):
         if playerObject.score >= 1000:
             playerObject.score -= 1000
-            self.heavyHit = True
+            self.heavyHit = True\
+
+    def buyAttack(self, playerObject):
+        if playerObject.score >= 500 * self.attackMultiplier:
+            playerObject.score -= 1000
+            self.attackMultiplier += 1.0
 
     def buyJumpingHeight(self, playerObject):
         if playerObject.score >= 500 * self.jumpingHeight:

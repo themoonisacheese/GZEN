@@ -53,4 +53,5 @@ class PNJ(GridAlignedObject):
             '...',
             'Eh je vous connais non?',
             'La musique ici est un peu repetitive...',
+            'C\'est marrant on est plusieurs a avoir la meme tenue...'
         ])

@@ -11,6 +11,7 @@ from textElement import TextElement
 from room import Room
 from player import Player
 from backwall import BackWall
+from diedmenu import DiedMenu
 
 pygame.init()
 pygame.font.init()
@@ -18,12 +19,11 @@ pygame.font.init()
 size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
-time = 180
+time = 5
 roomNumber = 0
 floorNumber = 5
 #roomNumber = 0
 #floorNumber = 1
-white=False
 pygame.key.set_repeat(1, 200)
 # Music
 pygame.mixer.music.load("music.wav")
@@ -37,6 +37,7 @@ for x in range(16):
 gameObjects.append(Room(roomNumber, floorNumber))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'tutorial')))
 gameObjects.append(Player())
+diedmenu = DiedMenu(SM, gameObjects[-1])
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(TextElement('texte', 'Calibri', 35, (189, 18, 18)))
@@ -54,9 +55,7 @@ while 1:
     # Start this when someone clicks on play or whatever
     seconds = clocktick/1000.0
     time -= seconds  # while time < 180...
-    if time<1 and white==False :
-        SM.fadeOut()
-        white=True
+
     timeleft = str(int(time)) + "s left!"
     gameObjects[-2].setText(timeleft)  # dirty adressing atm
     gameObjects[-2].moveto((98, 28))
@@ -82,7 +81,7 @@ while 1:
         roomNumber += 1
         if roomNumber >= 8:
             roomNumber = 0
-        gameObjects[-7] = Room(roomNumber, floorNumber)#FIXME
+        gameObjects[-7] = Room(roomNumber, floorNumber)
         gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 0
 
@@ -91,9 +90,22 @@ while 1:
         if roomNumber <= -1:
             roomNumber = 7
 
-        gameObjects[-7] = Room(roomNumber, floorNumber)#FIXME
+        gameObjects[-7] = Room(roomNumber, floorNumber)
         gameObjects[-7].show(True)
         gameObjects[-5].rect.centerx = 1024
+
+    if time<1:
+        SM.fadeOut(clocktick)
+        if SM.currentFadeIndex == 255:
+            diedmenu.display()
+            sm.currentFadeIndex = 0
+            time = 180
+            roomNumber = 0
+            floorNumber = 0
+            gameObjects[-7] = Room(roomNumber, floorNumber)
+
+
+        continue;
 
     for obj in gameObjects:
         obj.update(clocktick, gameObjects)

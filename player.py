@@ -85,7 +85,7 @@ class Player(GravityObject):
                         elif issubclass(block.__class__, Slime) or issubclass(block.__class__, Bat):
                             if self.isSwingingSword:
                                 # damage the enemy
-                                block.takeDamage(1)
+                                block.takeDamage(self.upgrades.attackMultiplier)
                                 if block.hp <= 0:
                                     obj.roomBlocks.append(Chicken(block.rect.center))
                                     block.destroy()
