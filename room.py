@@ -4,6 +4,14 @@ from spike import Spike
 from coin import Coin
 from bat import Bat
 from slime import Slime
+from slime2 import Slime2
+from slime3 import Slime3
+from slime4 import Slime4
+from slime5 import Slime5
+from bat2 import Bat2
+from bat3 import Bat3
+from bat4 import Bat4
+from bat5 import Bat5
 from backwall import BackWall
 from slime import Slime
 from spring import Spring
@@ -52,10 +60,28 @@ class Room(DisplayableElement):
                 elif color == (189, 18, 18, 255):
                     #enemy
                     if floordesign.get_at((x + (roomnumber*16), y+1)) == (0,0,0,255):
-                        self.roomBlocks.append(Slime((x,y)))
+                        if floorNumber == 1:
+                            self.roomBlocks.append(Slime((x, y)))
+                        elif floorNumber == 2:
+                            self.roomBlocks.append(Slime2((x,y)))
+                        elif floorNumber == 3:
+                            self.roomBlocks.append(Slime3((x,y)))
+                        elif floorNumber == 4:
+                            self.roomBlocks.append(Slime4((x,y)))
+                        elif floorNumber == 5:
+                            self.roomBlocks.append(Slime5((x,y)))
                     else:
                         # bat
-                        self.roomBlocks.append(Bat((x, y)))
+                        if floorNumber == 1:
+                            self.roomBlocks.append(Bat((x, y)))
+                        elif floorNumber == 2:
+                            self.roomBlocks.append(Bat2((x,y)))
+                        elif floorNumber == 3:
+                            self.roomBlocks.append(Bat3((x,y)))
+                        elif floorNumber == 4:
+                            self.roomBlocks.append(Bat4((x,y)))
+                        elif floorNumber == 5:
+                            self.roomBlocks.append(Bat5((x,y)))
                 elif color == (23, 18, 198, 255):
                     #spring
                     self.roomBlocks.append(Spring((x,y)))
