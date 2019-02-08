@@ -1,5 +1,6 @@
 import pygame
 from slime import Slime
+from gridAlignedObject import GridAlignedObject
 class Slime2(Slime):
     hp = 20
     damage = 200

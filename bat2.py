@@ -1,5 +1,6 @@
 import pygame
 from bat import Bat
+from gridAlignedObject import GridAlignedObject
 class Bat2(Bat) :
     hp = 20
     damage = 200
