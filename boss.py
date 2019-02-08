@@ -6,7 +6,10 @@ class Boss(GridAlignedObject):
     alreadyTalked = False
     def __init__(self, gridPosition):
         GridAlignedObject.__init__(self,gridPosition, aggregateAnim('sprites/npc', 'boss_idle_f'), 4)
-
+        self.currentLine=0;
+        self.dialogues=['Hehehe!','Bien joue d\'etre arrive jusqu\'ici.','Hihihi! ','Mais c\'etait en vain.','Tu ne peux pas sauver le monde.',' Hohoho!','Tu es destine a rester dans cette salle jusqu\'a la fin de tes jours...','Soit dans pas longtemps','Huhuhu!','']
     def getDialogue(self):
         self.alreadyTalked = True
-        return ('Hehehe! \n Bien joue d\'etre arrive jusqu\'ici. \n Hihihi! \n Mais c\'etait en vain. \n Tu ne peux pas sauver le monde. \n Hohoho! \n Tu es destine a rester dans cette salle jusqu\'a la fin de tes jours... \n Soit dans pas longtemps. \n Huhuhu!')
+    def nextDialogue(self):
+        self.currentLine+=1
+        return self.dialogues[self.currentLine-1]

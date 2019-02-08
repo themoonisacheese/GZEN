@@ -48,6 +48,11 @@ class Player(GravityObject):
                             self.setGravity(1.0)
                         objlist[index].show(True)
                         break;
+                    elif block.__class__.__name__ == 'Boss':
+                        if not block.alreadyTalked:
+                            self.changeVec((0,0))
+                            self.isInCutScene = True
+                            obj.roomBlocks.append(NpcDialog((block.rect.centerx, block.rect.top -200), block.getDialogue(), self.stopCutscene))
                     if self.isColliding(block):
                         if block.__class__.__name__ == 'Coin':
                             self.score = self.score + 100
