@@ -19,7 +19,6 @@ class ScreenManager:
 
     def fadeOut(self, ticktime):
         self.timesincelastfade += ticktime
-        print(self.timesincelastfade)
         if self.timesincelastfade > 100:
             self.timesincelastfade = 0
             self.currentFadeIndex  = min(255, self.currentFadeIndex +1)

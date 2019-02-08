@@ -96,12 +96,12 @@ while 1:
 
     if time<1:
         SM.fadeOut(clocktick)
-        if SM.currentFadeIndex == 255:
+        if SM.currentFadeIndex > 50:
             diedmenu.display()
-            sm.currentFadeIndex = 0
+            SM.currentFadeIndex = 0
             time = 180
             roomNumber = 0
-            floorNumber = 0
+            floorNumber = 1
             gameObjects[-7] = Room(roomNumber, floorNumber)
 
 
