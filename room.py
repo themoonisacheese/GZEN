@@ -32,7 +32,7 @@ class Room(DisplayableElement):
         elif floorNumber == 3:
             floordesignPath = 'design niveaux/lvl3.png'
         elif floorNumber == 4:
-            floordesignPath = 'design niveaux/lvl4(antigrav).png'
+            floordesignPath = 'design niveaux/lvl4.png'
         elif floorNumber == 5:
             floordesignPath = 'design niveaux/lvl5.png'
         elif floorNumber == 6:

@@ -19,9 +19,9 @@ pygame.font.init()
 size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
-time = 5
-roomNumber = 4
-floorNumber = 5
+time = 180
+roomNumber = 0
+floorNumber = 1
 #roomNumber = 0
 #floorNumber = 1
 pygame.key.set_repeat(1, 200)
@@ -38,7 +38,6 @@ gameObjects.append(Room(roomNumber, floorNumber))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'tutorial')))
 gameObjects.append(Player())
 diedmenu = DiedMenu(SM, gameObjects[-1])
-gameObjects[-1].score = 4000
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(DisplayableElement(aggregateAnim('sprites/environment', 'rectangle')))
 gameObjects.append(TextElement('texte', 'Calibri', 35, (189, 18, 18)))

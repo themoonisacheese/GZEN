@@ -88,7 +88,7 @@ class Player(GravityObject):
                                 self.setGravity(-self.gravity)
                                 block.use()
                         elif block.__class__.__name__ == 'PNJ':
-                            if not block.alreadyTalked:
+                            if not block.alreadyTalked and not self.upgrades.earPods:
                                 self.changeVec((0,0))
                                 self.isInCutScene = True
                                 obj.roomBlocks.append(NpcDialog((block.rect.centerx, block.rect.top -10), block.getDialogue(), self.stopCutscene))
