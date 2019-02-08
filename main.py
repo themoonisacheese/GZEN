@@ -19,8 +19,8 @@ pygame.font.init()
 size = width, height = 1024, 576
 SM = ScreenManager(size)
 clock = pygame.time.Clock()
-time = 5
-roomNumber = 0
+time = 20
+roomNumber = 2
 floorNumber = 5
 #roomNumber = 0
 #floorNumber = 1
@@ -103,7 +103,9 @@ while 1:
             roomNumber = 0
             floorNumber = 1
             gameObjects[-7] = Room(roomNumber, floorNumber)
-
+            gameObjects[-7].show(True)
+            gameObjects[-5].changeVec((0,0))
+            gameObjects[-5].respawn = True
 
         continue;
 

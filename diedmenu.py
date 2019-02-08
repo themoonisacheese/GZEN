@@ -22,6 +22,7 @@ class DiedMenu:
         for x in range(16):
             for y in range(9):
                 self.gameObjects.append(BackWall((x,y)))
+                self.gameObjects[-1].display = True
 
 
     def display(self):
@@ -29,12 +30,15 @@ class DiedMenu:
         while not self.retry:
             tick = self.clock.tick(60)
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     #test if we clicked a button
                     for obj in self.gameObjects:
                         if obj.rect.collidepoint(event.pos) and obj.__class__.__name__ == 'Button':
                             obj.click()
             self.sm.displayElements(self.gameObjects)
+        self.retry = False
 
     def firstMenu(self):
         self.addbackground()
@@ -78,22 +82,22 @@ class DiedMenu:
         self.gameObjects.append(Button((540, 440), 'sprites/menu/', 'retry', self.retryForReal))
 
     def upgradeSpeed(self):
-        self.player.upgrades.buyWalkingSpeed()
+        self.player.upgrades.buyWalkingSpeed(self.player)
         self.retryMenu()
     def upgradeAtk(self):
-        self.player.upgrades.buyAttack()
+        self.player.upgrades.buyAttack(self.player)
         self.retryMenu()
     def upgradeEarpods(self):
-        self.player.upgrades.buyEarPods()
+        self.player.upgrades.buyEarPods(self.player)
         self.retryMenu()
     def upgradeRes(self):
-        self.player.upgrades.buyResistance()
+        self.player.upgrades.buyResistance(self.player)
         self.retryMenu()
     def upgradeJump(self):
-        self.player.upgrades.buyJumpingHeight()
+        self.player.upgrades.buyJumpingHeight(self.player)
         self.retryMenu()
     def upgradeheavyHit(self):
-        self.player.upgrades.buyHeavyHit()
+        self.player.upgrades.buyHeavyHit(self.player)
         self.retryMenu()
     def retryForReal(self):
         self.retry = True
