@@ -21,7 +21,7 @@ SM = ScreenManager(size)
 clock = pygame.time.Clock()
 time = 5
 roomNumber = 0
-floorNumber = 3
+floorNumber = 5
 #roomNumber = 0
 #floorNumber = 1
 pygame.key.set_repeat(1, 200)
